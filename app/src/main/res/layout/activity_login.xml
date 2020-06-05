@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/AppTheme.Activity"
-        android:background="@color/colorPrimary"
+        android:background="@color/backgroundDark"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TMDb Play"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/onBackground"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

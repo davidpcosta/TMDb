@@ -18,7 +18,7 @@
             android:gravity="center"
             android:orientation="vertical"
             style="@style/AppTheme.Activity"
-            android:background="@color/colorPrimary">
+            android:background="@color/backgroundDark">
 
             <ImageView
                 android:id="@+id/movie_backdrop"
