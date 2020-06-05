@@ -19,6 +19,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), MODE_PRIVATE)
 
         Observable.timer(800, TimeUnit.MILLISECONDS)

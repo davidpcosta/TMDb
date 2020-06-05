@@ -85,17 +85,15 @@
     </style>
 
     <style name="AppTheme.Highlight.TabBar" parent="Widget.MaterialComponents.TabLayout.Colored" />
-
+    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
 
     <style name="AppTheme.Highlight.Details" />
-
     <style name="AppTheme.Highlight.Details.Title">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">16dp</item>
     </style>
-
     <style name="AppTheme.Highlight.Details.Item">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:alpha">0.7</item>
@@ -103,17 +101,13 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
+
 
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
     </style>
 
 </resources>

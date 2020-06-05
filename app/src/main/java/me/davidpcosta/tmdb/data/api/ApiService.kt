@@ -5,7 +5,6 @@ import me.davidpcosta.tmdb.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
@@ -22,7 +21,6 @@ object ApiService {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.TMDB_BASE_URL)
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient.build())
             .build()
