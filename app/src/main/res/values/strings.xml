@@ -28,6 +28,8 @@
     <string name="highlight_details_vote_average_label">Nota</string>
     <string name="highlight_details_cast_label">Elenco</string>
 
+    <string name="button_my_list_label">Minha lista</string>
+
     <string name="account_button_logout_label">Logout</string>
 
     <string name="const_shared_preference">user_login</string>

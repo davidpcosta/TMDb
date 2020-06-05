@@ -5,7 +5,7 @@
     tools:context=".ui.highlight.HighlightActivity">
 
     <data>
-        <variable name="activity" type="me.davidpcosta.tmdb.ui.highlight.HighlightActivity" />
+        <variable name="activity" type="me.davidcosta.tmdb.ui.highlight.HighlightActivity" />
     </data>
 
     <ScrollView
@@ -76,39 +76,36 @@
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/play_button"
-                style="@style/AppTheme.PrimaryButton"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/add_to_watchlist_button_container"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/highlight_button_play"
-                android:drawableStart="@drawable/ic_play_arrow_black_24dp"
-                android:onClick="@{() -> activity.handlePlayButtonClicked()}"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
+                android:orientation="vertical"
+                android:gravity="center"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                app:layout_constraintEnd_toStartOf="@+id/add_to_watchlist_button"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_overview" />
+                app:layout_constraintTop_toBottomOf="@id/movie_overview" >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/add_to_watchlist_button"
-                style="@style/AppTheme.SecondaryButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/highlight_button_watchlist_add_label"
-                android:drawableStart="@drawable/ic_star_white_24dp"
-                android:onClick="@{() -> activity.handleWatchlistButtonClicked()}"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toEndOf="@+id/play_button"
-                app:layout_constraintTop_toBottomOf="@id/movie_overview" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_to_watchlist_button"
+                    style="@style/AppTheme.SecondaryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/highlight_button_watchlist_add_label"
+                    android:onClick="@{() -> activity.handleWatchlistButtonClicked()}"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_add_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/button_my_list_label"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
                 <com.google.android.material.tabs.TabLayout
                     style="@style/AppTheme.Highlight.TabBar"
@@ -119,7 +116,7 @@
                     android:background="?attr/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/play_button">
+                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist_button_container">
 
                     <com.google.android.material.tabs.TabItem
                         android:text="@string/highlight_tab_text_similar"

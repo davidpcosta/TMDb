@@ -5,8 +5,8 @@
     tools:context=".ui.login.LoginActivity">
 
     <data>
-        <variable name="viewModel" type="me.davidpcosta.tmdb.ui.login.LoginViewModel" />
-        <variable name="activity" type="me.davidpcosta.tmdb.ui.login.LoginActivity" />
+        <variable name="viewModel" type="me.davidcosta.tmdb.ui.login.LoginViewModel" />
+        <variable name="activity" type="me.davidcosta.tmdb.ui.login.LoginActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +76,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/login_button"
             style="@style/AppTheme.PrimaryButton"
             android:layout_width="match_parent"
