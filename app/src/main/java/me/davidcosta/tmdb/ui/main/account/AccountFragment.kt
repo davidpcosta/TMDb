@@ -43,7 +43,7 @@ class AccountFragment : Fragment() {
         return view
     }
 
-    fun handleLogoutButtonClicked() {
+    private fun handleLogoutButtonClicked() {
         deleteUserInfo()
         goToLogin()
     }
@@ -87,5 +87,31 @@ class AccountFragment : Fragment() {
             }
         })
     }
+
+    // TODO: Handle login ckeck in account screen
+
+    //    private lateinit var sharedPreferences: SharedPreferences
+    //    sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), MODE_PRIVATE)
+
+    //    private fun checkUserLoggedIn() {
+    //        if (isUserLoggedIn()) {
+    //            goToMain()
+    //        } else {
+    //            goToLogin()
+    //        }
+    //    }
+
+    //    private fun goToLogin() {
+    //        val intent = Intent(this, LoginActivity::class.java)
+    //        startActivity(intent)
+    //        finish()
+    //    }
+
+
+    //    private fun isUserLoggedIn(): Boolean {
+    //        val sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")
+    //        val accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
+    //        return sessionId!!.isNotBlank() && accountId > 0
+    //    }
 
 }
