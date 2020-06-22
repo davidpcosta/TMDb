@@ -39,44 +39,59 @@ class WatchlistRepository(private val api: Api, private val movieDao: MovieDao) 
         return movieDao.getAll()
     }
 
-    fun addToWatchlist(accountId: Long, sessionId: String, movie: Movie): LiveData<WatchlistOperationResponse> {
+    // TODO: Create session object to keep logged in users
+    fun addToWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
         val operationResponse = MutableLiveData<WatchlistOperationResponse>()
 
-        val m = Media(mediaType = "movie", mediaId = movie.id, watchlist = true)
-        api.addToWatchlist(accountId = accountId, sessionId = sessionId, media = m).enqueue(object: Callback<WatchlistOperationResponse> {
-            override fun onResponse(call: Call<WatchlistOperationResponse>, response: Response<WatchlistOperationResponse>) {
-                response.body()?.let {
-                    if (it.statusCode == 1 || it.statusCode == 12) {
-                        movieDao.insert(movie)
-                        operationResponse.value = it
+        if (sessionId != null) { // logged in
+            val media = Media(mediaType = "movie", mediaId = movie.id, watchlist = true)
+            api.addToWatchlist(accountId = accountId, sessionId = sessionId, media = media).enqueue(object: Callback<WatchlistOperationResponse> {
+                override fun onResponse(call: Call<WatchlistOperationResponse>, response: Response<WatchlistOperationResponse>) {
+                    response.body()?.let {
+                        if (it.statusCode == 1 || it.statusCode == 12) {
+                            movieDao.insert(movie)
+                            operationResponse.value = it
+                        }
                     }
                 }
-            }
-            override fun onFailure(call: Call<WatchlistOperationResponse>, t: Throwable) {
-                throw t
-            }
-        })
+                override fun onFailure(call: Call<WatchlistOperationResponse>, t: Throwable) {
+                    throw t
+                }
+            })
+        }
+        else {
+            movieDao.insert(movie)
+            // TODO: Create generic response
+            operationResponse.value = WatchlistOperationResponse(1, "")
+        }
 
         return operationResponse
     }
 
-    fun removeFromWatchlist(accountId: Long, sessionId: String, movie: Movie): LiveData<WatchlistOperationResponse> {
+    // TODO: Create session object to keep logged in users
+    fun removeFromWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
         val operationResponse = MutableLiveData<WatchlistOperationResponse>()
 
-        val m = Media(mediaType = "movie", mediaId = movie.id, watchlist = false)
-        api.addToWatchlist(accountId = accountId, sessionId = sessionId, media = m).enqueue(object: Callback<WatchlistOperationResponse> {
-            override fun onResponse(call: Call<WatchlistOperationResponse>, response: Response<WatchlistOperationResponse>) {
-                response.body()?.let {
-                    if (it.statusCode == 13) {
-                        movieDao.delete(movie)
-                        operationResponse.value = it
+        if (sessionId != null) { // logged in
+            val m = Media(mediaType = "movie", mediaId = movie.id, watchlist = false)
+            api.addToWatchlist(accountId = accountId, sessionId = sessionId, media = m).enqueue(object: Callback<WatchlistOperationResponse> {
+                override fun onResponse(call: Call<WatchlistOperationResponse>, response: Response<WatchlistOperationResponse>) {
+                    response.body()?.let {
+                        if (it.statusCode == 13) {
+                            movieDao.delete(movie)
+                            operationResponse.value = it
+                        }
                     }
                 }
-            }
-            override fun onFailure(call: Call<WatchlistOperationResponse>, t: Throwable) {
-                throw t
-            }
-        })
+                override fun onFailure(call: Call<WatchlistOperationResponse>, t: Throwable) {
+                    throw t
+                }
+            })
+        } else {
+            movieDao.delete(movie)
+            // TODO: Create generic response
+            operationResponse.value = WatchlistOperationResponse(13, "")
+        }
 
         return operationResponse
     }

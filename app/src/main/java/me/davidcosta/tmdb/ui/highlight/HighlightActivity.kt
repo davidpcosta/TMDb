@@ -26,7 +26,7 @@ class HighlightActivity : AppCompatActivity() {
     private lateinit var highlightViewModel: HighlightViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var movie: Movie
-    private lateinit var sessionId: String
+    private var sessionId: String? = null
     private var accountId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class HighlightActivity : AppCompatActivity() {
         highlightViewModel = ViewModelProvider(this, HighlightViewModelFactory(this)).get(HighlightViewModel::class.java)
         movie = intent.getSerializableExtra(getString(R.string.const_key_movie)) as Movie
         sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
-        sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")!!
+        sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), null)
         accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
 
         initComponents()

@@ -29,11 +29,11 @@ class HighlightViewModel(private val moviesRepository: MoviesRepository, private
         movieDetails = moviesRepository.movieDetails(movieId)
     }
 
-    fun addToWatchlist(accountId: Long, sessionId: String, movie: Movie): LiveData<WatchlistOperationResponse> {
+    fun addToWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
         return watchlistRepository.addToWatchlist(accountId, sessionId, movie)
     }
 
-    fun removeFromWatchlist(accountId: Long, sessionId: String, movie: Movie): LiveData<WatchlistOperationResponse> {
+    fun removeFromWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
         return watchlistRepository.removeFromWatchlist(accountId, sessionId, movie)
     }
 
