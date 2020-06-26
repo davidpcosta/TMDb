@@ -11,7 +11,6 @@
         android:id="@+id/avatar"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -27,7 +26,6 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textColor="@color/onBackground"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatar" />
@@ -40,7 +38,6 @@
         android:layout_marginTop="8dp"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name" />
@@ -51,12 +48,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account_button_logout_label"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
         tools:layout_editor_absoluteX="24dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/account_info_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="username, name, avatar, logout_button" />
+
+    <Button
+        android:id="@+id/login_button"
+        style="@style/AppTheme.PrimaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_button_login_label"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="24dp" />
+
 
     <ProgressBar
         android:id="@+id/loading"

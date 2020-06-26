@@ -31,6 +31,7 @@
     <string name="button_my_list_label">Minha lista</string>
 
     <string name="account_button_logout_label">Logout</string>
+    <string name="account_button_login_label">Entrar</string>
 
     <string name="const_shared_preference">user_login</string>
     <string name="const_key_account_id">account_id</string>

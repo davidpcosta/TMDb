@@ -7,19 +7,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main_fragment_account.view.*
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.hide
 import me.davidcosta.tmdb.show
 import me.davidcosta.tmdb.ui.login.LoginActivity
+import me.davidcosta.tmdb.ui.main.MainActivity
 
 class AccountFragment : Fragment() {
 
@@ -34,17 +33,30 @@ class AccountFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
         sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")!!
 
-        val logoutButton: Button = view.findViewById(R.id.logout_button)
-        logoutButton.setOnClickListener {
-            handleLogoutButtonClicked()
+        view.logout_button.setOnClickListener {
+            handleLogoutButtonClick()
         }
 
-        fetchAccountDetails()
+        view.login_button.setOnClickListener {
+            handleLoginButtonClick()
+        }
+
+        if (sessionId.isNotBlank()) {
+            fetchAccountDetails()
+        } else {
+            view.login_button.show()
+            view.loading.hide()
+        }
         return view
     }
 
-    private fun handleLogoutButtonClicked() {
+    private fun handleLogoutButtonClick() {
         deleteUserInfo()
+        goToMain()
+        Toast.makeText(activity, "Sessão encerrada", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun handleLoginButtonClick() {
         goToLogin()
     }
 
@@ -59,59 +71,30 @@ class AccountFragment : Fragment() {
         val intent = Intent(requireActivity(), LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         requireActivity().startActivity(intent)
-        requireActivity().finish()
+    }
+
+    private fun goToMain() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        requireActivity().startActivity(intent)
     }
 
     private fun fetchAccountDetails() {
         accountViewModel.fetchAccountDetails(sessionId)
         accountViewModel.accountDetails.observe(viewLifecycleOwner, Observer {
             view?.let {view ->
-                val avatar: ImageView = view.findViewById(R.id.avatar)
-                val name: TextView = view.findViewById(R.id.name)
-                val username: TextView = view.findViewById(R.id.username)
-                val loading: ProgressBar = view.findViewById(R.id.loading)
-                val logoutButton: Button = view.findViewById(R.id.logout_button)
 
                 Picasso.with(activity)
                     .load(BuildConfig.GRAVATAR_BASE_URL + it.avatar.gravatar.hash)
-                    .into(avatar)
+                    .into(view.avatar)
 
-                name.text = it.name
-                username.text = it.username
+                view.name.text = it.name
+                view.username.text = it.username
 
-                avatar.show()
-                name.show()
-                username.show()
-                logoutButton.show()
-                loading.hide()
+                view.account_info_group.show()
+                view.loading.hide()
             }
         })
     }
-
-    // TODO: Handle login ckeck in account screen
-
-    //    private lateinit var sharedPreferences: SharedPreferences
-    //    sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), MODE_PRIVATE)
-
-    //    private fun checkUserLoggedIn() {
-    //        if (isUserLoggedIn()) {
-    //            goToMain()
-    //        } else {
-    //            goToLogin()
-    //        }
-    //    }
-
-    //    private fun goToLogin() {
-    //        val intent = Intent(this, LoginActivity::class.java)
-    //        startActivity(intent)
-    //        finish()
-    //    }
-
-
-    //    private fun isUserLoggedIn(): Boolean {
-    //        val sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")
-    //        val accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
-    //        return sessionId!!.isNotBlank() && accountId > 0
-    //    }
 
 }
