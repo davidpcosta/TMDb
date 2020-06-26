@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TMDb Play</string>
+    <string name="app_name">TMDb</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Usuário</string>
