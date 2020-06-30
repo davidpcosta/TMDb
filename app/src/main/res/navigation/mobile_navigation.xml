@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="me.davidcosta.tmdb.ui.main.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/activity_main_nav_home"
         tools:layout="@layout/activity_main_fragment_home" />
 
     <fragment
         android:id="@+id/navigation_watchlist"
         android:name="me.davidcosta.tmdb.ui.main.watchlist.WatchlistFragment"
-        android:label="@string/title_watchlist"
+        android:label="@string/activity_main_nav_watchlist"
         tools:layout="@layout/activity_main_fragment_watchlist" />
 
     <fragment
         android:id="@+id/navigation_my_account"
         android:name="me.davidcosta.tmdb.ui.main.account.AccountFragment"
-        android:label="@string/title_account"
+        android:label="@string/activity_main_nav_settings"
         tools:layout="@layout/activity_main_fragment_account" />
 </navigation>

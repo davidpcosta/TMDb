@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "me.davidpcosta.tmdb"
+        applicationId "me.davidcosta.tmdb"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

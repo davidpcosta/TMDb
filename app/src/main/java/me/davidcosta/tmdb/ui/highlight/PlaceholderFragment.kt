@@ -81,7 +81,7 @@ class PlaceholderFragment : Fragment() {
         highlightViewModel.cast.observe(viewLifecycleOwner, Observer<List<Cast>> {
             view?.let {view ->
                 val cast = view.findViewById<TextView>(R.id.cast)
-                cast.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_cast_label), castToStringList(it))
+                cast.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_cast), castToStringList(it))
             }
         })
     }
@@ -91,19 +91,19 @@ class PlaceholderFragment : Fragment() {
         highlightViewModel.movieDetails.observe(viewLifecycleOwner, Observer<MovieDetails> {
             view?.let {view ->
                 val originalTitle = view.findViewById<TextView>(R.id.original_title)
-                originalTitle.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_original_title_label), it.originalTitle)
+                originalTitle.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_original_title), it.originalTitle)
 
                 val genres = view.findViewById<TextView>(R.id.genres)
-                genres.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_genres_label), genresToStringList(it.genres))
+                genres.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_genres), genresToStringList(it.genres))
 
                 val releaseDate = view.findViewById<TextView>(R.id.release_date)
-                releaseDate.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_release_date_label), it.releaseDate.toLongFormatString())
+                releaseDate.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_release_date), it.releaseDate.toLongFormatString())
 
                 val originalLanguage = view.findViewById<TextView>(R.id.original_language)
-                originalLanguage.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_original_language_label), it.originalLanguage)
+                originalLanguage.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_original_language), it.originalLanguage)
 
                 val averageRate = view.findViewById<TextView>(R.id.average_rate)
-                averageRate.text = formatHtmlTextView(requireActivity().getString(R.string.highlight_details_vote_average_label), it.voteAverage.toString())
+                averageRate.text = formatHtmlTextView(requireActivity().getString(R.string.activity_highlight_label_vote_average), it.voteAverage.toString())
             }
         })
     }

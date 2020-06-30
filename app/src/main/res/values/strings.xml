@@ -1,38 +1,35 @@
 <resources>
     <string name="app_name">TMDb</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_username">Usuário</string>
-    <string name="prompt_password">Senha</string>
-    <string name="action_sign_in">Entrar</string>
-    <string name="login_failed">"Login ou senha incorretos"</string>
+    <!-- MAIN / SETTINGS -->
+    <string name="fragment_settings_label_username">Usuário</string>
+    <string name="fragment_settings_label_password">Senha</string>
+    <string name="fragment_settings_label_button_logout">Logout</string>
+    <string name="fragment_settings_button_sign_in">Entrar</string>
+    <string name="fragment_settings_message_sign_in_failed">"Login ou senha incorretos"</string>
 
+    <!-- MAIN / BOTTOM NAV BAR -->
+    <string name="activity_main_nav_home">Home</string>
+    <string name="activity_main_nav_watchlist">Minha lista</string>
+    <string name="activity_main_nav_settings">Minha conta</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_watchlist">Minha lista</string>
-    <string name="title_account">Minha conta</string>
+    <!-- HIGHLIGHT -->
+    <string name="activity_highlight_tab_similar">Assista Também</string>
+    <string name="activity_highlight_tab_details">Detalhes</string>
+    <string name="activity_highlight_description_movie_poster">Poster do filme</string>
+    <string name="activity_highlight_label_more_details">Ficha técinica</string>
+    <string name="activity_highlight_label_original_title">Título original</string>
+    <string name="activity_highlight_label_genres">Generos</string>
+    <string name="activity_highlight_label_release_date">Data de lançamento</string>
+    <string name="activity_highlight_label_original_language">Idioma original</string>
+    <string name="activity_highlight_label_vote_average">Nota</string>
+    <string name="activity_highlight_label_cast">Elenco</string>
+    <string name="activity_highlight_button_add_to_watchlist">Minha lista</string>
+    <string name="activity_highlight_button_added_to_watchlist">Adicionado</string>
+    <string name="activity_highlight_message_added_to_watchlist">"Filme adicionado à sua lista"</string>
+    <string name="activity_highlight_message_removed_from_watchlist">Filme removido da sua lista</string>
 
-    <string name="highlight_tab_text_similar">Assista Também</string>
-    <string name="highlight_tab_text_details">Detalhes</string>
-    <string name="highlight_details_details_label">Ficha técinica</string>
-    <string name="highlight_movie_poster_content_description">Poster do filme</string>
-    <string name="highlight_button_watchlist_add_label">Minha lista</string>
-    <string name="highlight_button_watchlist_added_label">Adicionado</string>
-    <string name="highlight_message_watchlist_added">"Filme adicionado à sua lista"</string>
-    <string name="highlight_message_watchlist_removed">Filme removido da sua lista</string>
-    <string name="highlight_button_play">Assista</string>
-    <string name="highlight_details_original_title_label">Título original</string>
-    <string name="highlight_details_genres_label">Generos</string>
-    <string name="highlight_details_release_date_label">Data de lançamento</string>
-    <string name="highlight_details_original_language_label">Idioma original</string>
-    <string name="highlight_details_vote_average_label">Nota</string>
-    <string name="highlight_details_cast_label">Elenco</string>
-
-    <string name="button_my_list_label">Minha lista</string>
-
-    <string name="account_button_logout_label">Logout</string>
-    <string name="account_button_login_label">Entrar</string>
-
+    <!-- CONSTANTS -->
     <string name="const_shared_preference">user_login</string>
     <string name="const_key_account_id">account_id</string>
     <string name="const_key_session_id">session_id</string>

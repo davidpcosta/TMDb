@@ -11,8 +11,8 @@ class SectionsPagerAdapter(private val movie: Movie, private val context: Contex
 FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val TAB_TITLES = arrayOf(
-        R.string.highlight_tab_text_similar,
-        R.string.highlight_tab_text_details
+        R.string.activity_highlight_tab_similar,
+        R.string.activity_highlight_tab_details
     )
 
     override fun getItem(position: Int): Fragment {

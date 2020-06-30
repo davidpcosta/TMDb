@@ -70,7 +70,7 @@ class HighlightActivity : AppCompatActivity() {
                 .observe(this, Observer {
                     if (it.statusCode == 1 || it.statusCode == 12) {
                         highlightViewModel.isOnWatchlist(movie)
-                        toast(getString(R.string.highlight_message_watchlist_added))
+                        toast(getString(R.string.activity_highlight_message_added_to_watchlist))
                     }
                 })
         } else {
@@ -78,7 +78,7 @@ class HighlightActivity : AppCompatActivity() {
                 .observe(this, Observer {
                     if (it.statusCode == 13) {
                         highlightViewModel.isOnWatchlist(movie)
-                        toast(getString(R.string.highlight_message_watchlist_removed))
+                        toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
                     }
                 })
         }
