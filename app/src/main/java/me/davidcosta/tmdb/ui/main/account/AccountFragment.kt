@@ -15,8 +15,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_fragment_account.view.*
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.hide
-import me.davidcosta.tmdb.show
+import me.davidcosta.tmdb.extensions.hide
+import me.davidcosta.tmdb.extensions.show
 import me.davidcosta.tmdb.ui.login.LoginActivity
 import me.davidcosta.tmdb.ui.main.MainActivity
 

@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.data.model.Genre
-import me.davidcosta.tmdb.hide
-import me.davidcosta.tmdb.show
+import me.davidcosta.tmdb.extensions.hide
+import me.davidcosta.tmdb.extensions.show
 
 class GenreAdapter(
     applicationContext: Context,
@@ -34,8 +34,7 @@ class GenreAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.genre_item, parent, false) as View
-        val viewHolder =
-            ViewHolder(view)
+        val viewHolder = ViewHolder(view)
 
         viewManager = LinearLayoutManager(parent.context)
         viewManager.orientation = LinearLayoutManager.HORIZONTAL

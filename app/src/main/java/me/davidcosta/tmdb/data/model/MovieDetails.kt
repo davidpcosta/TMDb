@@ -14,5 +14,9 @@ data class MovieDetails (
     @SerializedName("genres") var genres: List<Genre>,
     @SerializedName("backdrop_path") var backdropPath: String,
     @SerializedName("overview") var overview: String,
-    @SerializedName("poster_path") var posterPath: String
+    @SerializedName("poster_path") var posterPath: String,
+    @SerializedName("runtime") var runtime: Int,
+    @SerializedName("status") var status: String,
+    @SerializedName("budget") var budget: Double,
+    @SerializedName("revenue") var revenue: Double
 ): Serializable

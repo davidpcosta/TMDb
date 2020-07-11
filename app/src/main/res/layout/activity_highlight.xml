@@ -1,145 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.highlight.HighlightActivity">
+    tools:context=".ui.highlight.HighlightActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <data>
-        <variable name="activity" type="me.davidcosta.tmdb.ui.highlight.HighlightActivity" />
-    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
-    <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        <ImageView
+            android:id="@+id/activity_highlight_backdrop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/activity_highlight_description_movie_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_button_add_to_watchlist" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:id="@+id/activity_highlight_backdrop_gradient"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_backdrop_gradient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_button_add_to_watchlist" />
+
+        <ImageView
+            android:id="@+id/activity_highlight_poster"
+            android:layout_width="150dp"
+            android:layout_height="225dp"
+            android:layout_marginTop="48dp"
+            android:contentDescription="@string/activity_highlight_description_movie_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/activity_highlight_aditional_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_highlight_poster" >
+
+            <TextView
+                android:id="@+id/activity_highlight_vote_avarege"
+                style="@style/Widget.MyTheme.Highlight.VoteAvarege"
+                tools:text="Nota: 6,1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/Widget.MyTheme.Highlight.ListSeparator"
+                android:text="@string/string_list_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_highlight_year"
+                style="@style/Widget.MyTheme.Highlight.Year"
+                tools:text="2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/Widget.MyTheme.Highlight.ListSeparator"
+                android:text="@string/string_list_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_highlight_runtime"
+                style="@style/Widget.MyTheme.Highlight.Runtime"
+                tools:text="2h 21m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/activity_highlight_button_add_to_watchlist"
+            style="@style/Widget.MyTheme.Button.Primary"
+            app:icon="@drawable/ic_add_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_highlight_button_add_to_watchlist"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_highlight_aditional_info"/>
+
+        <TextView
+            android:id="@+id/activity_highlight_label_overview"
+            style="@style/Widget.MyTheme.Highlight.SubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            style="@style/AppTheme.Activity"
-            android:background="@color/backgroundDark">
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="@string/activity_highlight_label_overview"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_button_add_to_watchlist" />
 
-            <ImageView
-                android:id="@+id/movie_backdrop"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/activity_highlight_description_movie_poster"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/view_pager"/>
+        <TextView
+            android:id="@+id/activity_highlight_overview"
+            style="@style/Widget.MyTheme.Highlight.Body"
+            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@id/activity_highlight_label_overview" />
 
-            <View
-                android:id="@+id/movie_backdrop_gradient"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/shape_backdrop_gradient"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/view_pager"/>
+        <TextView
+            android:id="@+id/activity_highlight_label_details"
+            style="@style/Widget.MyTheme.Highlight.SubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="@string/activity_highlight_label_more_details"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_overview" />
 
-            <ImageView
-                android:id="@+id/movie_poster"
-                android:layout_width="120dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="56dp"
-                android:contentDescription="@string/activity_highlight_description_movie_poster"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- Original Title -->
 
-            <TextView
-                android:id="@+id/movie_title"
-                style="@style/AppTheme.Highlight.MovieTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_poster" />
+        <TextView
+            android:id="@+id/activity_highlight_label_original_title"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_original_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_details" />
 
-            <TextView
-                android:id="@+id/movie_overview"
-                style="@style/AppTheme.Highlight.MovieOverview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        <TextView
+            android:id="@+id/activity_highlight_original_title"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="Resident Evil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_original_title" />
 
-            <LinearLayout
-                android:id="@+id/add_to_watchlist_button_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_overview" >
+        <!-- Genres -->
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/add_to_watchlist_button"
-                    style="@style/AppTheme.SecondaryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/activity_highlight_button_add_to_watchlist"
-                    android:onClick="@{() -> activity.handleWatchlistButtonClicked()}"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_add_black_24dp" />
+        <TextView
+            android:id="@+id/activity_highlight_label_genres"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_original_title" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/activity_highlight_button_add_to_watchlist"
-                    android:textSize="12sp"
-                    android:textColor="@android:color/white"
+        <TextView
+            android:id="@+id/activity_highlight_genres"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="Ação, Aventura, Drama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_genres" />
 
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
+        <!-- Release Date -->
 
-                <com.google.android.material.tabs.TabLayout
-                    style="@style/AppTheme.Highlight.TabBar"
-                    android:id="@+id/tabs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:background="?attr/colorPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist_button_container">
+        <TextView
+            android:id="@+id/activity_highlight_label_release_date"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_release_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_genres" />
 
-                    <com.google.android.material.tabs.TabItem
-                        android:text="@string/activity_highlight_tab_similar"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
+        <TextView
+            android:id="@+id/activity_highlight_release_date"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="26/04/2000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_release_date" />
 
-                    <com.google.android.material.tabs.TabItem
-                        android:text="@string/activity_highlight_tab_details"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+        <!-- Original Language -->
 
-                </com.google.android.material.tabs.TabLayout>
+        <TextView
+            android:id="@+id/activity_highlight_label_original_language"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_original_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_release_date" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="550dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabs">
-            </androidx.viewpager.widget.ViewPager>
+        <TextView
+            android:id="@+id/activity_highlight_original_language"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="Inglês"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_original_language" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Status -->
 
-    </ScrollView>
-</layout>
+        <TextView
+            android:id="@+id/activity_highlight_label_status"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_original_language" />
+
+        <TextView
+            android:id="@+id/activity_highlight_status"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="Lançado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_status" />
+
+        <!-- Budget -->
+
+        <TextView
+            android:id="@+id/activity_highlight_label_budget"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_budged"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_status" />
+
+        <TextView
+            android:id="@+id/activity_highlight_budget"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="$ 8.000.000,00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_budget" />
+
+        <!-- Revenue -->
+
+        <TextView
+            android:id="@+id/activity_highlight_label_revenue"
+            style="@style/Widget.MyTheme.Highlight.Label"
+            android:text="@string/activity_highlight_label_revenue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_budget" />
+
+        <TextView
+            android:id="@+id/activity_highlight_revenue"
+            style="@style/Widget.MyTheme.Highlight.LabelValue"
+            tools:text="$ 8.000.000,00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_revenue" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

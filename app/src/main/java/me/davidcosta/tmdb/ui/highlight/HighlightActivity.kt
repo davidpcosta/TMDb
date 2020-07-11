@@ -3,22 +3,18 @@ package me.davidcosta.tmdb.ui.highlight
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
-import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.BlurTransformation
-import me.davidcosta.tmdb.BuildConfig
+import kotlinx.android.synthetic.main.activity_highlight.*
 import me.davidcosta.tmdb.R
+import me.davidcosta.tmdb.data.model.Cast
 import me.davidcosta.tmdb.data.model.Movie
-import me.davidcosta.tmdb.databinding.ActivityHighlightBinding
-import me.davidcosta.tmdb.toast
+import me.davidcosta.tmdb.data.model.MovieDetails
+import me.davidcosta.tmdb.enums.Language
+import me.davidcosta.tmdb.enums.Status
+import me.davidcosta.tmdb.extensions.*
+import java.util.*
 
 
 class HighlightActivity : AppCompatActivity() {
@@ -31,10 +27,7 @@ class HighlightActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        DataBindingUtil.setContentView<ActivityHighlightBinding>(this, R.layout.activity_highlight).apply {
-            this.activity = this@HighlightActivity
-        }
+        setContentView(R.layout.activity_highlight)
 
         highlightViewModel = ViewModelProvider(this, HighlightViewModelFactory(this)).get(HighlightViewModel::class.java)
         movie = intent.getSerializableExtra(getString(R.string.const_key_movie)) as Movie
@@ -42,24 +35,27 @@ class HighlightActivity : AppCompatActivity() {
         sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), null)
         accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
 
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        activity_highlight_button_add_to_watchlist.setOnClickListener {
+            this.handleWatchlistButtonClicked()
+        }
+
         initComponents()
         setViewData()
+        fetchMovieDetails()
+        fetchMovieCast()
     }
 
     private fun initComponents() {
-        val viewPager: ViewPager = findViewById(R.id.view_pager)
-        viewPager.adapter = SectionsPagerAdapter(movie,this, supportFragmentManager)
-
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        tabs.setupWithViewPager(viewPager)
-
-        val watchlistButton: ImageButton = findViewById(R.id.add_to_watchlist_button)
         highlightViewModel.isOnWatchlist(movie)
         highlightViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
-                watchlistButton.setImageResource(R.drawable.ic_done_black_24dp)
+                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
             } else {
-                watchlistButton.setImageResource(R.drawable.ic_add_black_24dp)
+                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
+
             }
         })
     }
@@ -84,27 +80,68 @@ class HighlightActivity : AppCompatActivity() {
         }
     }
 
-    fun handlePlayButtonClicked() {
-        toast("Não implementado :(")
+    private fun setViewData() {
+        movie.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
+        movie.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
+        activity_highlight_overview.text = movie.overview
     }
 
-    private fun setViewData() {
-        val moviePoster: ImageView = findViewById(R.id.movie_poster)
-        Picasso.with(applicationContext)
-            .load(BuildConfig.TMDB_IMAGE_URL + movie.posterPath)
-            .into(moviePoster)
 
-        val movieBackdrop: ImageView = findViewById(R.id.movie_backdrop)
-        Picasso.with(applicationContext)
-            .load(BuildConfig.TMDB_IMAGE_URL + movie.backdropPath)
-            .transform(BlurTransformation(applicationContext, 5, 1))
-            .into(movieBackdrop)
+    private fun fetchMovieDetails() {
+        highlightViewModel.movieDetails(movie.id)
+        highlightViewModel.movieDetails.observe(this, Observer<MovieDetails> {
+            activity_highlight_vote_avarege.text = getString(
+                R.string.activity_highlight_value_vote_average,
+                (it.voteAverage * 10).toInt()
+            )
+            activity_highlight_runtime.text = getString(
+                R.string.activity_highlight_value_runtime,
+                it.runtime
+            )
+            activity_highlight_year.text = it.releaseDate.toYearFormat()
+            activity_highlight_genres.text = it.genres.toStringList()
 
-        val movieTitle: TextView = findViewById(R.id.movie_title)
-        movieTitle.text = movie.title
+            activity_highlight_original_title.text = it.originalTitle
+            activity_highlight_release_date.text = it.releaseDate.toLongFormat()
+            activity_highlight_original_language.text = getLanguage(it.originalLanguage)
+            activity_highlight_status.text = getStatus(it.status)
+            activity_highlight_budget.text = getString(R.string.activity_highlight_value_money, it.budget)
+            activity_highlight_revenue.text = getString(R.string.activity_highlight_value_money, it.revenue)
+        })
+    }
 
-        val movieOverview: TextView = findViewById(R.id.movie_overview)
-        movieOverview.text = movie.overview
+    private fun fetchMovieCast() {
+//        highlightViewModel.fetchCredits(movie.id)
+//        highlightViewModel.cast.observe(this, Observer<List<Cast>> {
+//            cast.text = formatHtmlTextView(getString(R.string.activity_highlight_label_cast), castToStringList(it))
+//        })
+    }
+
+    private fun castToStringList(castLis: List<Cast>?): String {
+        val maxCast = 15
+        castLis?.let { cast ->
+            val newMaxCast = if (cast.size < maxCast) cast.size else maxCast
+            return cast.subList(0, newMaxCast).joinToString {
+                it.name
+            }
+        }
+        return ""
+    }
+
+    private fun getLanguage(value: String): String {
+        return try {
+            getString(value.toEnum<Language>().label)
+        } catch(e: Exception) {
+            value
+        }
+    }
+
+    private fun getStatus(value: String): String {
+        return try {
+            getString(value.toEnum<Status>().label)
+        } catch(e: Exception) {
+            value
+        }
     }
 
 }

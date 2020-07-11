@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import me.davidcosta.tmdb.*
 import me.davidcosta.tmdb.data.model.LoginResponse
 import me.davidcosta.tmdb.databinding.ActivityLoginBinding
+import me.davidcosta.tmdb.extensions.*
 import me.davidcosta.tmdb.ui.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {

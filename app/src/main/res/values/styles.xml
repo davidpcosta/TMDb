@@ -1,113 +1,79 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primaryVariant</item>
-        <item name="colorOnPrimary">@color/onPrimary</item>
+    <style name="Widget" />
+    <style name="Widget.MyTheme" />
 
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondaryVariant</item>
-        <item name="colorOnSecondary">@color/onSecondary</item>
+    <!-- Home -->
+    <style name="Widget.MyTheme.Home">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:alpha">0.9</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
-        <item name="windowActionBarOverlay">true</item>
-        <item name="colorPrimary">@android:color/transparent</item>
-        <item name="android:displayOptions">showHome</item>
-    </style>
-
-    <style name="AppTheme.FullScream" parent="android:Theme.Material.Wallpaper.NoTitleBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.Activity">
-        <item name="android:background">@color/background</item>
-    </style>
-
-    <style name="AppTheme.PrimaryButton">
-        <item name="android:backgroundTint">@color/secondary</item>
-        <item name="android:textColor">@color/onSecondary</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AppTheme.SecondaryButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="fabSize">mini</item>
-    </style>
-
-    <style name="AppTheme.EditText">
-        <item name="android:background">@color/background</item>
-        <item name="android:textColor">@color/onBackground</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="AppTheme.Home" />
-
-    <style name="AppTheme.Home.GenreLabel">
-        <item name="android:textColor">@color/onBackground</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">6dp</item>
-    </style>
-
-    <style name="AppTheme.Highlight" />
-
-    <style name="AppTheme.Highlight.MovieTitle">
-        <item name="android:textColor">@color/onBackground</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingTop">8dp</item>
+    <style name="Widget.MyTheme.Home.Subtitle">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
+        <item name="android:paddingTop">32dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="AppTheme.Highlight.MovieOverview">
-        <item name="android:textColor">@color/onBackground</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
-
-    <style name="AppTheme.Highlight.TabBar" parent="Widget.MaterialComponents.TabLayout.Colored" />
-    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
-
-    <style name="AppTheme.Highlight.Details" />
-    <style name="AppTheme.Highlight.Details.Title">
-        <item name="android:textColor">@color/onBackground</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginBottom">16dp</item>
-    </style>
-    <style name="AppTheme.Highlight.Details.Item">
-        <item name="android:textColor">@color/onBackground</item>
+    <!-- Highlight -->
+    <style name="Widget.MyTheme.Highlight">
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:alpha">0.7</item>
-        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.MovieTitle">
+        <item name="android:textAppearance">?attr/textAppearanceHeadline5</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.Genres">
+        <item name="android:textAppearance">?attr/textAppearanceOverline</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.VoteAvarege">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle2</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.Year">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle2</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.Runtime">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle2</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.ListSeparator">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle2</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+    </style>
+
+    <style name="Widget.MyTheme.Highlight.SubTitle">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
+        <item name="android:paddingTop">32dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <style name="Widget.MyTheme.Highlight.Label">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle2</item>
+    </style>
 
+    <style name="Widget.MyTheme.Highlight.LabelValue">
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:alpha">0.5</item>
+    </style>
 
-    <style name="FullscreenTheme" parent="AppTheme">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+    <style name="Widget.MyTheme.Highlight.Body">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+    </style>
+
+    <style name="Widget.MyTheme.Button" />
+    <style name="Widget.MyTheme.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="iconTint">?attr/colorOnSecondary</item>
     </style>
 
 </resources>
