@@ -17,7 +17,7 @@
             android:name="me.davidcosta.tmdb.ui.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.FullScreen">
+            android:theme="@style/Theme.TMDbTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

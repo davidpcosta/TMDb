@@ -9,7 +9,7 @@
     <color name="blackOverlay">#66000000</color>
 
     <!-- TMDb Colors -->
-    <color name="tmdbDarkBlue">#ff0d253f</color>
-    <color name="tmdbLightBlue">#ff01b4e4</color>
-    <color name="tmdbLightGreen">#ff90cea1</color>
+    <color name="tmdb_dark_blue">#ff0d253f</color>
+    <color name="tmdb_light_blue">#ff01b4e4</color>
+    <color name="tmdb_light_green">#ff90cea1</color>
 </resources>

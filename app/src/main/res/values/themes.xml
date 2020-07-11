@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.MyApp" parent="Base.Theme.MyApp"/>
 
-    <style name="Theme.MyApp.FullScreen" parent="Base.Theme.MyApp">
+    <!-- MyApp Theme -->
+    <style name="Theme.MyApp" parent="Base.Theme.MyApp"/>
+    <style name="Theme.MyApp.FullScreen" parent="Base.Theme.MyApp.FullScreen" />
+    <style name="Theme.MyApp.NoActionBar" parent="Base.Theme.MyApp.NoActionBar" />
+    <style name="Theme.MyApp.ActionBar.Transparent" parent="Base.Theme.MyApp.ActionBar.Transparent" />
+
+    <!-- TMDb Theme -->
+    <style name="Theme.TMDbTheme" parent="Base.Theme.MyApp">
+        <item name="colorPrimary">@color/tmdb_light_blue</item>
+        <item name="colorPrimaryVariant">@color/tmdb_light_blue</item>
+
+        <item name="colorSecondary">@color/tmdb_light_green</item>
+        <item name="colorSecondaryVariant">@color/tmdb_light_green</item>
+
+        <item name="colorAccent">@color/tmdb_light_green</item>
+        <item name="android:colorBackground">@color/tmdb_dark_blue</item>
+    </style>
+
+    <style name="Theme.TMDbTheme.FullScreen">
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@color/transparent</item>
     </style>
 
-    <style name="Theme.MyApp.NoActionBar" parent="Base.Theme.MyApp">
+    <style name="Theme.TMDbTheme.NoActionBar" parent="Base.Theme.MyApp.NoActionBar" />
+    <style name="Theme.TMDbTheme.ActionBar.Transparent" parent="Base.Theme.MyApp.ActionBar.Transparent" />
+
+
+
+    <!-- Base Theme -->
+
+    <style name="Base.Theme.MyApp.FullScreen">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@color/transparent</item>
+    </style>
+
+    <style name="Base.Theme.MyApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.MyApp.ActionBar.Transparent" parent="Base.Theme.MyApp">
+    <style name="Base.Theme.MyApp.ActionBar" />
+    <style name="Base.Theme.MyApp.ActionBar.Transparent">
         <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="colorPrimary">@color/transparent</item>
@@ -31,7 +67,7 @@
         <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/white</item>
 
-        <item name="colorAccent">@color/tmdbLightBlue</item>
+        <item name="colorAccent">@color/tmdb_light_blue</item>
 
         <!--colorBackground appears behind scrollable content and is used for the default window background. -->
         <item name="android:colorBackground">@color/black</item>
