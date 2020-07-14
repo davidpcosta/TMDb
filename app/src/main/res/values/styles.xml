@@ -11,8 +11,9 @@
 
     <style name="Widget.MyTheme.Home.Subtitle">
         <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
-        <item name="android:paddingTop">32dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingStart">2dp</item>
     </style>
 
     <!-- Highlight -->

@@ -3,10 +3,7 @@ package me.davidcosta.tmdb.ui.highlight
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import me.davidcosta.tmdb.data.model.Cast
-import me.davidcosta.tmdb.data.model.Movie
-import me.davidcosta.tmdb.data.model.MovieDetails
-import me.davidcosta.tmdb.data.model.WatchlistOperationResponse
+import me.davidcosta.tmdb.data.model.*
 import me.davidcosta.tmdb.data.repository.MoviesRepository
 import me.davidcosta.tmdb.data.repository.WatchlistRepository
 
@@ -29,16 +26,16 @@ class HighlightViewModel(private val moviesRepository: MoviesRepository, private
         movieDetails = moviesRepository.movieDetails(movieId)
     }
 
-    fun addToWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
-        return watchlistRepository.addToWatchlist(accountId, sessionId, movie)
+    fun addToWatchlist(accountId: Long, sessionId: String?, media: Media): LiveData<WatchlistOperationResponse> {
+        return watchlistRepository.addToWatchlist(accountId, sessionId, media)
     }
 
-    fun removeFromWatchlist(accountId: Long, sessionId: String?, movie: Movie): LiveData<WatchlistOperationResponse> {
-        return watchlistRepository.removeFromWatchlist(accountId, sessionId, movie)
+    fun removeFromWatchlist(accountId: Long, sessionId: String?, media: Media): LiveData<WatchlistOperationResponse> {
+        return watchlistRepository.removeFromWatchlist(accountId, sessionId, media)
     }
 
-    fun isOnWatchlist(movie: Movie) {
+    fun isOnWatchlist(media: Media) {
         isOnWatchlist as MutableLiveData
-        isOnWatchlist.value = watchlistRepository.isInWatchlist(movie)
+        isOnWatchlist.value = watchlistRepository.isInWatchlist(media)
     }
 }

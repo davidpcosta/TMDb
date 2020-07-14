@@ -45,7 +45,7 @@ class AccountFragment : Fragment() {
             fetchAccountDetails()
         } else {
             view.login_button.show()
-            view.loading.hide()
+            view.fragment_home_popular_movies_loading.hide()
         }
         return view
     }
@@ -92,7 +92,7 @@ class AccountFragment : Fragment() {
                 view.username.text = it.username
 
                 view.account_info_group.show()
-                view.loading.hide()
+                view.fragment_home_popular_movies_loading.hide()
             }
         })
     }

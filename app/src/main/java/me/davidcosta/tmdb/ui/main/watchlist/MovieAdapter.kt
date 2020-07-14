@@ -9,29 +9,29 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Movie
+import me.davidcosta.tmdb.data.model.Media
 
 class MovieAdapter(private val applicationContext: Context): BaseAdapter() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var movies: List<Movie> = ArrayList()
+    var medias: List<Media> = ArrayList()
 
     override fun getCount(): Int {
-        return movies.size
+        return medias.size
     }
 
-    override fun getItem(i: Int): Movie {
-        return movies[i]
+    override fun getItem(i: Int): Media {
+        return medias[i]
     }
 
     override fun getItemId(i: Int): Long {
-        return movies[i].id
+        return medias[i].id
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         val view: View?
         val viewHolder: ViewHolder
-        val movie = getItem(position)
+        val media = getItem(position)
 
         if (convertView == null) {
             view = inflater.inflate(R.layout.movie_item, parent, false)
@@ -42,9 +42,9 @@ class MovieAdapter(private val applicationContext: Context): BaseAdapter() {
             viewHolder = view.tag as ViewHolder
         }
 
-        viewHolder.poster.contentDescription = movie.title
+        viewHolder.poster.contentDescription = media.name
         Picasso.with(applicationContext)
-            .load(BuildConfig.TMDB_IMAGE_URL + movie.posterPath)
+            .load(BuildConfig.TMDB_IMAGE_URL + media.posterPath)
             .placeholder(R.drawable.movie_poster_placeholder)
             .into(viewHolder.poster)
 

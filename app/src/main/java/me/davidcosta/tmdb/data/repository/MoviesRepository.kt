@@ -95,4 +95,38 @@ class MoviesRepository(private val api: Api) {
         return movieDetails
     }
 
+    fun popularMovies(): LiveData<List<Media>> {
+        val result = MutableLiveData<List<Media>>()
+
+        api.moviesPopular().enqueue(object: Callback<PagedResult<Media>> {
+            override fun onResponse(call: Call<PagedResult<Media>>, response: Response<PagedResult<Media>>) {
+                response.body()?.let {
+                    result.value = it.results
+                }
+            }
+            override fun onFailure(call: Call<PagedResult<Media>>, t: Throwable) {
+                throw t
+            }
+        })
+
+        return result
+    }
+
+    fun popularTvs(): LiveData<List<Media>> {
+        val result = MutableLiveData<List<Media>>()
+
+        api.tvsPopular().enqueue(object: Callback<PagedResult<Media>> {
+            override fun onResponse(call: Call<PagedResult<Media>>, response: Response<PagedResult<Media>>) {
+                response.body()?.let {
+                    result.value = it.results
+                }
+            }
+            override fun onFailure(call: Call<PagedResult<Media>>, t: Throwable) {
+                throw t
+            }
+        })
+
+        return result
+    }
+
 }

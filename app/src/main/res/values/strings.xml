@@ -196,6 +196,10 @@
     <string name="status_released">Lançado</string>
     <string name="status_canceled">Cancelado</string>
 
+    <!-- MAIN / HOME -->
+    <string name="fragment_home_label_popular_movies">Filmes Populares</string>
+    <string name="fragment_home_label_popular_tvs">Séries Populares</string>
+
     <!-- MAIN / SETTINGS -->
     <string name="fragment_settings_label_username">Usuário</string>
     <string name="fragment_settings_label_password">Senha</string>
@@ -234,7 +238,7 @@
     <string name="const_shared_preference">user_login</string>
     <string name="const_key_account_id">account_id</string>
     <string name="const_key_session_id">session_id</string>
-    <string name="const_key_movie">movie</string>
+    <string name="const_key_media">media</string>
 
 
 </resources>

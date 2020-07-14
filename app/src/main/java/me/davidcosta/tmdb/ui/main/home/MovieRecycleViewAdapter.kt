@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Movie
+import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.extensions.loadPoster
+import me.davidcosta.tmdb.extensions.toast
 import me.davidcosta.tmdb.ui.highlight.HighlightActivity
 
 class MovieRecycleViewAdapter(
@@ -18,7 +20,7 @@ class MovieRecycleViewAdapter(
 ): RecyclerView.Adapter<MovieRecycleViewAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var movies: List<Movie> = ArrayList()
+    var medias: List<Media> = ArrayList()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -33,25 +35,30 @@ class MovieRecycleViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return medias.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = movies[position]
-        holder.poster.contentDescription = movie.title
-        Picasso.with(applicationContext)
-            .load(BuildConfig.TMDB_IMAGE_URL + movie.posterPath)
-            .placeholder(R.drawable.movie_poster_placeholder)
-            .into(holder.poster)
+        val media = medias[position]
+        holder.poster.contentDescription = media.nameOrTile
+
+        media.posterPath?.let {
+            holder.poster.loadPoster(applicationContext, it)
+        }
 
         holder.itemView.setOnClickListener {
-            goToMovie(movie)
+            goToMovie(media)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            applicationContext.toast(media.nameOrTile)
+            true
         }
     }
 
-    private fun goToMovie(movie: Movie) {
+    private fun goToMovie(media: Media) {
         val intent = Intent(applicationContext, HighlightActivity::class.java)
-        intent.putExtra(applicationContext.getString(R.string.const_key_movie), movie)
+        intent.putExtra(applicationContext.getString(R.string.const_key_media), media)
         applicationContext.startActivity(intent)
     }
 }

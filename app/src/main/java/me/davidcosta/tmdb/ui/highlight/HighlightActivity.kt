@@ -9,19 +9,18 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_highlight.*
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.data.model.Cast
-import me.davidcosta.tmdb.data.model.Movie
 import me.davidcosta.tmdb.data.model.MovieDetails
+import me.davidcosta.tmdb.data.model.Media
 import me.davidcosta.tmdb.enums.Language
 import me.davidcosta.tmdb.enums.Status
 import me.davidcosta.tmdb.extensions.*
-import java.util.*
 
 
 class HighlightActivity : AppCompatActivity() {
 
     private lateinit var highlightViewModel: HighlightViewModel
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var movie: Movie
+    private lateinit var media: Media
     private var sessionId: String? = null
     private var accountId: Long = 0
 
@@ -30,7 +29,7 @@ class HighlightActivity : AppCompatActivity() {
         setContentView(R.layout.activity_highlight)
 
         highlightViewModel = ViewModelProvider(this, HighlightViewModelFactory(this)).get(HighlightViewModel::class.java)
-        movie = intent.getSerializableExtra(getString(R.string.const_key_movie)) as Movie
+        media = intent.getSerializableExtra(getString(R.string.const_key_media)) as Media
         sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
         sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), null)
         accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
@@ -49,7 +48,7 @@ class HighlightActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
-        highlightViewModel.isOnWatchlist(movie)
+        highlightViewModel.isOnWatchlist(media)
         highlightViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
                 activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
@@ -62,18 +61,18 @@ class HighlightActivity : AppCompatActivity() {
 
     fun handleWatchlistButtonClicked() {
         if (highlightViewModel.isOnWatchlist.value == false) {
-            highlightViewModel.addToWatchlist(accountId, sessionId, movie)
+            highlightViewModel.addToWatchlist(accountId, sessionId, media)
                 .observe(this, Observer {
                     if (it.statusCode == 1 || it.statusCode == 12) {
-                        highlightViewModel.isOnWatchlist(movie)
+                        highlightViewModel.isOnWatchlist(media)
                         toast(getString(R.string.activity_highlight_message_added_to_watchlist))
                     }
                 })
         } else {
-            highlightViewModel.removeFromWatchlist(accountId, sessionId, movie)
+            highlightViewModel.removeFromWatchlist(accountId, sessionId, media)
                 .observe(this, Observer {
                     if (it.statusCode == 13) {
-                        highlightViewModel.isOnWatchlist(movie)
+                        highlightViewModel.isOnWatchlist(media)
                         toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
                     }
                 })
@@ -81,14 +80,14 @@ class HighlightActivity : AppCompatActivity() {
     }
 
     private fun setViewData() {
-        movie.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
-        movie.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
-        activity_highlight_overview.text = movie.overview
+        media.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
+        media.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
+        activity_highlight_overview.text = media.overview
     }
 
 
     private fun fetchMovieDetails() {
-        highlightViewModel.movieDetails(movie.id)
+        highlightViewModel.movieDetails(media.id)
         highlightViewModel.movieDetails.observe(this, Observer<MovieDetails> {
             activity_highlight_vote_avarege.text = getString(
                 R.string.activity_highlight_value_vote_average,

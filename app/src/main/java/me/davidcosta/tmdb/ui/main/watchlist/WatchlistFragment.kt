@@ -54,15 +54,15 @@ class WatchlistFragment : Fragment() {
 
     private fun observeWatchlist() {
         watchlistViewModel.fetchWatchlist(accountId, sessionId)
-        watchlistViewModel.movies.observe(viewLifecycleOwner, Observer {
-            movieAdapter.movies = it.sortedBy { movie -> movie.title }
+        watchlistViewModel.medias.observe(viewLifecycleOwner, Observer {
+            movieAdapter.medias = it.sortedBy { media -> media.name }
             movieAdapter.notifyDataSetChanged()
         })
     }
 
     private fun goToMovie(movie: Movie) {
         val intent = Intent(requireActivity(), HighlightActivity::class.java)
-        intent.putExtra(getString(R.string.const_key_movie), movie)
+        intent.putExtra(getString(R.string.const_key_media), movie)
         requireActivity().startActivity(intent)
     }
 }

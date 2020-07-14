@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             this.activity = this@LoginActivity
         }
 
-        loading = findViewById(R.id.loading)
+        loading = findViewById(R.id.fragment_home_popular_movies_loading)
         loginButton = findViewById(R.id.login_button)
 
         observeErrorMessage()
