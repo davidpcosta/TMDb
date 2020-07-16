@@ -1,4 +1,4 @@
-package me.davidcosta.tmdb.ui.highlight
+package me.davidcosta.tmdb.ui.highlight.movie
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,19 +6,30 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.activity_highlight.*
+import kotlinx.android.synthetic.main.activity_highlight_movie.*
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_backdrop
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_button_add_to_watchlist
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_genres
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_label_overview
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_original_language
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_original_title
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_overview
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_poster
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_release_date
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_status
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_vote_avarege
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Cast
-import me.davidcosta.tmdb.data.model.MovieDetails
+import me.davidcosta.tmdb.data.model.Movie
 import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.enums.Language
-import me.davidcosta.tmdb.enums.Status
+import me.davidcosta.tmdb.enums.MovieStatus
 import me.davidcosta.tmdb.extensions.*
 
 
-class HighlightActivity : AppCompatActivity() {
+class HighlightMovieActivity : AppCompatActivity() {
 
-    private lateinit var highlightViewModel: HighlightViewModel
+    private lateinit var highlightViewModel: HighlightMovieViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var media: Media
     private var sessionId: String? = null
@@ -26,13 +37,15 @@ class HighlightActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_highlight)
+        setContentView(R.layout.activity_highlight_movie)
 
-        highlightViewModel = ViewModelProvider(this, HighlightViewModelFactory(this)).get(HighlightViewModel::class.java)
-        media = intent.getSerializableExtra(getString(R.string.const_key_media)) as Media
-        sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
-        sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), null)
-        accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
+        highlightViewModel = ViewModelProvider(this,
+            HighlightMovieViewModelFactory(this)
+        ).get(HighlightMovieViewModel::class.java)
+        media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as Media
+        sharedPreferences = getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)
+        sessionId = sharedPreferences.getString(Keys.PREFERENCES_ACCOUNT_ID.value, null)
+        accountId = sharedPreferences.getLong(Keys.PREFERENCES_SESSION_ID.value, 0)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -82,13 +95,19 @@ class HighlightActivity : AppCompatActivity() {
     private fun setViewData() {
         media.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
         media.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
-        activity_highlight_overview.text = media.overview
-    }
+
+        if (media.overview.isNullOrBlank()) {
+            activity_highlight_label_overview.hide()
+            activity_highlight_overview.hide()
+        } else {
+            activity_highlight_overview.show()
+            activity_highlight_overview.text = media.overview
+        }    }
 
 
     private fun fetchMovieDetails() {
         highlightViewModel.movieDetails(media.id)
-        highlightViewModel.movieDetails.observe(this, Observer<MovieDetails> {
+        highlightViewModel.movieDetails.observe(this, Observer<Movie> {
             activity_highlight_vote_avarege.text = getString(
                 R.string.activity_highlight_value_vote_average,
                 (it.voteAverage * 10).toInt()
@@ -110,21 +129,7 @@ class HighlightActivity : AppCompatActivity() {
     }
 
     private fun fetchMovieCast() {
-//        highlightViewModel.fetchCredits(movie.id)
-//        highlightViewModel.cast.observe(this, Observer<List<Cast>> {
-//            cast.text = formatHtmlTextView(getString(R.string.activity_highlight_label_cast), castToStringList(it))
-//        })
-    }
-
-    private fun castToStringList(castLis: List<Cast>?): String {
-        val maxCast = 15
-        castLis?.let { cast ->
-            val newMaxCast = if (cast.size < maxCast) cast.size else maxCast
-            return cast.subList(0, newMaxCast).joinToString {
-                it.name
-            }
-        }
-        return ""
+        // TODO(Implement)
     }
 
     private fun getLanguage(value: String): String {
@@ -137,7 +142,7 @@ class HighlightActivity : AppCompatActivity() {
 
     private fun getStatus(value: String): String {
         return try {
-            getString(value.toEnum<Status>().label)
+            getString(value.toEnum<MovieStatus>().label)
         } catch(e: Exception) {
             value
         }

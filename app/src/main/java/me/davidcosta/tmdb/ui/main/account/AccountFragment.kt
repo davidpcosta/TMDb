@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_fragment_account.view.*
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
+import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.extensions.hide
 import me.davidcosta.tmdb.extensions.show
 import me.davidcosta.tmdb.ui.login.LoginActivity
@@ -30,8 +31,8 @@ class AccountFragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_main_fragment_account, container, false)
 
         accountViewModel = ViewModelProvider(this, AccountViewModelFactory()).get(AccountViewModel::class.java)
-        sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
-        sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")!!
+        sharedPreferences = requireActivity().getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)
+        sessionId = sharedPreferences.getString(Keys.PREFERENCES_SESSION_ID.value, "")!!
 
         view.logout_button.setOnClickListener {
             handleLogoutButtonClick()
@@ -62,8 +63,8 @@ class AccountFragment : Fragment() {
 
     private fun deleteUserInfo() {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.remove(getString(R.string.const_key_session_id))
-        editor.remove(getString(R.string.const_key_account_id))
+        editor.remove(Keys.PREFERENCES_SESSION_ID.value)
+        editor.remove(Keys.PREFERENCES_ACCOUNT_ID.value)
         editor.apply()
     }
 

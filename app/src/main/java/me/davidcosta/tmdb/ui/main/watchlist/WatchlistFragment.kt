@@ -13,8 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Movie
-import me.davidcosta.tmdb.ui.highlight.HighlightActivity
+import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.enums.Keys
+import me.davidcosta.tmdb.ui.highlight.movie.HighlightMovieActivity
 
 
 class WatchlistFragment : Fragment() {
@@ -29,17 +30,17 @@ class WatchlistFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_main_fragment_watchlist, container, false)
 
-        sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.const_shared_preference), Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)
         watchlistViewModel = ViewModelProvider(this, WatchlistViewModelFactory(requireActivity().applicationContext)).get(WatchlistViewModel::class.java)
         movieAdapter = MovieAdapter(requireActivity().applicationContext)
-        sessionId = sharedPreferences.getString(getString(R.string.const_key_session_id), "")!!
-        accountId = sharedPreferences.getLong(getString(R.string.const_key_account_id), 0)
+        sessionId = sharedPreferences.getString(Keys.PREFERENCES_SESSION_ID.value, "")!!
+        accountId = sharedPreferences.getLong(Keys.PREFERENCES_ACCOUNT_ID.value, 0)
 
         // Grid view
         watchlistGrid = view.findViewById<GridView>(R.id.watchlist).apply {
             adapter = movieAdapter
             onItemClickListener =  AdapterView.OnItemClickListener { _, _, position, _ ->
-                goToMovie(this.adapter.getItem(position) as Movie)
+                goToMedia(this.adapter.getItem(position) as Media)
             }
         }
 
@@ -60,9 +61,9 @@ class WatchlistFragment : Fragment() {
         })
     }
 
-    private fun goToMovie(movie: Movie) {
-        val intent = Intent(requireActivity(), HighlightActivity::class.java)
-        intent.putExtra(getString(R.string.const_key_media), movie)
+    private fun goToMedia(media: Media) {
+        val intent = Intent(requireActivity(), HighlightMovieActivity::class.java)
+        intent.putExtra(Keys.EXTRAS_MEDIA.value, media)
         requireActivity().startActivity(intent)
     }
 }

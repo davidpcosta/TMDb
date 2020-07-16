@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import me.davidcosta.tmdb.*
 import me.davidcosta.tmdb.data.model.LoginResponse
 import me.davidcosta.tmdb.databinding.ActivityLoginBinding
+import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.extensions.*
 import me.davidcosta.tmdb.ui.main.MainActivity
 
@@ -26,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory()).get(LoginViewModel::class.java)
-        sharedPreferences = getSharedPreferences(getString(R.string.const_shared_preference), MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, MODE_PRIVATE)
 
         DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login).apply {
             this.viewModel = loginViewModel
@@ -66,8 +67,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun saveUserInfo(authenticationResult: LoginResponse) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putLong(getString(R.string.const_key_account_id), authenticationResult.accountId!!)
-        editor.putString(getString(R.string.const_key_session_id), authenticationResult.sessionId)
+        editor.putLong(Keys.PREFERENCES_ACCOUNT_ID.value, authenticationResult.accountId!!)
+        editor.putString(Keys.PREFERENCES_SESSION_ID.value, authenticationResult.sessionId)
         editor.apply()
     }
 

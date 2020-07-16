@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.highlight.HighlightActivity"
+    tools:context=".ui.highlight.movie.HighlightMovieActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
@@ -70,20 +70,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/activity_highlight_year"
-                style="@style/Widget.MyTheme.Highlight.Year"
-                tools:text="2020"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/Widget.MyTheme.Highlight.ListSeparator"
-                android:text="@string/string_list_separator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_runtime"
+                android:id="@+id/activity_highlight_tv_season_count"
                 style="@style/Widget.MyTheme.Highlight.Runtime"
                 tools:text="2h 21m"
                 android:layout_width="wrap_content"
@@ -244,49 +231,49 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_status" />
 
-        <!-- Budget -->
+<!--        &lt;!&ndash; Budget &ndash;&gt;-->
 
-        <TextView
-            android:id="@+id/activity_highlight_label_budget"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_budged"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_status" />
+<!--        <TextView-->
+<!--            android:id="@+id/activity_highlight_label_budget"-->
+<!--            style="@style/Widget.MyTheme.Highlight.Label"-->
+<!--            android:text="@string/activity_highlight_label_budged"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_status" />-->
 
-        <TextView
-            android:id="@+id/activity_highlight_budget"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="$ 8.000.000,00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_budget" />
+<!--        <TextView-->
+<!--            android:id="@+id/activity_highlight_budget"-->
+<!--            style="@style/Widget.MyTheme.Highlight.LabelValue"-->
+<!--            tools:text="$ 8.000.000,00"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_budget" />-->
 
-        <!-- Revenue -->
+<!--        &lt;!&ndash; Revenue &ndash;&gt;-->
 
-        <TextView
-            android:id="@+id/activity_highlight_label_revenue"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_revenue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_budget" />
+<!--        <TextView-->
+<!--            android:id="@+id/activity_highlight_label_revenue"-->
+<!--            style="@style/Widget.MyTheme.Highlight.Label"-->
+<!--            android:text="@string/activity_highlight_label_revenue"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_budget" />-->
 
-        <TextView
-            android:id="@+id/activity_highlight_revenue"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="$ 8.000.000,00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_revenue" />
+<!--        <TextView-->
+<!--            android:id="@+id/activity_highlight_revenue"-->
+<!--            style="@style/Widget.MyTheme.Highlight.LabelValue"-->
+<!--            tools:text="$ 8.000.000,00"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_revenue" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

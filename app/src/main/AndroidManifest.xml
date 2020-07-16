@@ -24,7 +24,13 @@
         </activity>
 
         <activity
-            android:name="me.davidcosta.tmdb.ui.highlight.HighlightActivity"
+            android:name="me.davidcosta.tmdb.ui.highlight.movie.HighlightMovieActivity"
+            android:parentActivityName="me.davidcosta.tmdb.ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyApp.ActionBar.Transparent" />
+
+        <activity
+            android:name="me.davidcosta.tmdb.ui.highlight.tv.HighlightTvActivity"
             android:parentActivityName="me.davidcosta.tmdb.ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyApp.ActionBar.Transparent" />

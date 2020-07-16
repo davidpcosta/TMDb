@@ -13,13 +13,13 @@ class MoviesRepository(private val api: Api) {
     fun genres(): LiveData<List<Genre>> {
         val genres = MutableLiveData<List<Genre>>()
 
-        api.genres().enqueue(object: Callback<Generes> {
-            override fun onResponse(call: Call<Generes>, response: Response<Generes>) {
+        api.movieGenres().enqueue(object: Callback<Genres> {
+            override fun onResponse(call: Call<Genres>, response: Response<Genres>) {
                 response.body()?.let {
                     genres.value = it.genres
                 }
             }
-            override fun onFailure(call: Call<Generes>, t: Throwable) {
+            override fun onFailure(call: Call<Genres>, t: Throwable) {
                 throw t
             }
         })
@@ -27,16 +27,16 @@ class MoviesRepository(private val api: Api) {
         return genres
     }
 
-    fun moviesByGenre(genreId: Long): LiveData<List<Movie>> {
-        val result = MutableLiveData<List<Movie>>()
+    fun moviesByGenre(genreId: Long): LiveData<List<Media>> {
+        val result = MutableLiveData<List<Media>>()
 
-        api.moviesByGenre(genreId).enqueue(object: Callback<PagedResult<Movie>> {
-            override fun onResponse(call: Call<PagedResult<Movie>>, response: Response<PagedResult<Movie>>) {
+        api.moviesByGenre(genreId).enqueue(object: Callback<PagedResult<Media>> {
+            override fun onResponse(call: Call<PagedResult<Media>>, response: Response<PagedResult<Media>>) {
                 response.body()?.let {
                     result.value = it.results
                 }
             }
-            override fun onFailure(call: Call<PagedResult<Movie>>, t: Throwable) {
+            override fun onFailure(call: Call<PagedResult<Media>>, t: Throwable) {
                 throw t
             }
         })
@@ -44,16 +44,16 @@ class MoviesRepository(private val api: Api) {
         return result
     }
 
-    fun similarMovies(movieId: Long): LiveData<List<Movie>> {
-        val result = MutableLiveData<List<Movie>>()
+    fun similarMovies(movieId: Long): LiveData<List<Media>> {
+        val result = MutableLiveData<List<Media>>()
 
-        api.similarMovies(movieId).enqueue(object: Callback<PagedResult<Movie>> {
-            override fun onResponse(call: Call<PagedResult<Movie>>, response: Response<PagedResult<Movie>>) {
+        api.similarMovies(movieId).enqueue(object: Callback<PagedResult<Media>> {
+            override fun onResponse(call: Call<PagedResult<Media>>, response: Response<PagedResult<Media>>) {
                 response.body()?.let {
                     result.value = it.results
                 }
             }
-            override fun onFailure(call: Call<PagedResult<Movie>>, t: Throwable) {
+            override fun onFailure(call: Call<PagedResult<Media>>, t: Throwable) {
                 throw t
             }
         })
@@ -78,16 +78,16 @@ class MoviesRepository(private val api: Api) {
         return credits
     }
 
-    fun movieDetails(movieId: Long): LiveData<MovieDetails> {
-        val movieDetails = MutableLiveData<MovieDetails>()
+    fun movieDetails(movieId: Long): LiveData<Movie> {
+        val movieDetails = MutableLiveData<Movie>()
 
-        api.movieDetails(movieId).enqueue(object: Callback<MovieDetails> {
-            override fun onResponse(call: Call<MovieDetails>, response: Response<MovieDetails>) {
+        api.movieDetails(movieId).enqueue(object: Callback<Movie> {
+            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                 response.body()?.let {
                     movieDetails.value = response.body()
                 }
             }
-            override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
+            override fun onFailure(call: Call<Movie>, t: Throwable) {
                 throw t
             }
         })
@@ -111,22 +111,4 @@ class MoviesRepository(private val api: Api) {
 
         return result
     }
-
-    fun popularTvs(): LiveData<List<Media>> {
-        val result = MutableLiveData<List<Media>>()
-
-        api.tvsPopular().enqueue(object: Callback<PagedResult<Media>> {
-            override fun onResponse(call: Call<PagedResult<Media>>, response: Response<PagedResult<Media>>) {
-                response.body()?.let {
-                    result.value = it.results
-                }
-            }
-            override fun onFailure(call: Call<PagedResult<Media>>, t: Throwable) {
-                throw t
-            }
-        })
-
-        return result
-    }
-
 }

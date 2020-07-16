@@ -7,8 +7,9 @@ import retrofit2.http.*
 
 interface Api {
 
-    // Authentication endpoints
-
+    /******************************************
+     * AUTHENTICATION
+     ******************************************/
     @GET("/3/authentication/token/new")
     fun createRequestToken(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
@@ -30,15 +31,15 @@ interface Api {
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
     ): Call<SessionResult>
 
-    // Account Details
+    /******************************************
+     * ACCOUNT
+     ******************************************/
 
     @GET("account")
     fun accountDetails(
         @Query("session_id") sessionId: String,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
     ): Call<AccountDetails>
-
-    // Watchlist
 
     @GET("account/{account_id}/watchlist/movies")
     fun watchlist(
@@ -64,13 +65,15 @@ interface Api {
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
     ): Call<WatchlistOperationResponse>
 
-    // Movies
+    /******************************************
+     * MOVIES
+     ******************************************/
 
     @GET("genre/movie/list")
-    fun genres(
+    fun movieGenres(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<Generes>
+    ): Call<Genres>
 
     @GET("discover/movie")
     fun moviesByGenre(
@@ -78,14 +81,14 @@ interface Api {
         @Query("include_adult") includeAdults: Boolean = false,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Movie>>
+    ): Call<PagedResult<Media>>
 
     @GET("movie/{movie_id}")
     fun movieDetails(
         @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<MovieDetails>
+    ): Call<Movie>
 
     @GET("movie/{movie_id}/similar")
     fun similarMovies(
@@ -93,7 +96,7 @@ interface Api {
         @Query("include_adult") includeAdults: Boolean = false,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Movie>>
+    ): Call<PagedResult<Media>>
 
     @GET("movie/{movieId}/credits")
     fun movieCredits(
@@ -106,6 +109,23 @@ interface Api {
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
     ): Call<PagedResult<Media>>
+
+    /******************************************
+     * TV
+     ******************************************/
+
+    @GET("genre/tv/list")
+    fun tvGenres(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Call<Genres>
+
+    @GET("tv/{tv_id}")
+    fun tvDetails(
+        @Path("tv_id") tvId: Long,
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Call<Tv>
 
     @GET("tv/popular")
     fun tvsPopular(

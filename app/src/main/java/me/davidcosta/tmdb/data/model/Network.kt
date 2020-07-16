@@ -5,13 +5,10 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-
 @Entity
-data class TV (
+data class Network(
     @PrimaryKey @SerializedName("id") var id: Long,
     @SerializedName("name") var name: String,
-    @SerializedName("original_name") var originalName: String,
-    @SerializedName("backdrop_path") var backdropPath: String?,
-    @SerializedName("overview") var overview: String?,
-    @SerializedName("poster_path") var posterPath: String?
+    @SerializedName("logo_path") var logoPath: String,
+    @SerializedName("origin_country") var originCountry: String
 ): Serializable

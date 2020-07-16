@@ -3,14 +3,17 @@ package me.davidcosta.tmdb.ui.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import me.davidcosta.tmdb.data.model.Genre
-import me.davidcosta.tmdb.data.model.Movie
 import me.davidcosta.tmdb.data.model.Media
 import me.davidcosta.tmdb.data.repository.MoviesRepository
+import me.davidcosta.tmdb.data.repository.TvsRepository
 
-class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
+class HomeViewModel(
+    private val moviesRepository: MoviesRepository,
+    private val tvsRepository: TvsRepository
+) : ViewModel() {
 
     lateinit var genres: LiveData<List<Genre>>
-    lateinit var movies: LiveData<List<Movie>>
+    lateinit var movies: LiveData<List<Media>>
     lateinit var popularMovies: LiveData<List<Media>>
     lateinit var popularTvs: LiveData<List<Media>>
 
@@ -27,6 +30,6 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     }
 
     fun fetchPopularTvs() {
-        popularTvs = moviesRepository.popularTvs()
+        popularTvs = tvsRepository.popularTvs()
     }
 }

@@ -1,4 +1,4 @@
-package me.davidcosta.tmdb.ui.highlight
+package me.davidcosta.tmdb.ui.highlight.tv
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -7,22 +7,24 @@ import androidx.room.Room
 import me.davidcosta.tmdb.data.api.ApiService
 import me.davidcosta.tmdb.data.dao.AppDatabase
 import me.davidcosta.tmdb.data.repository.MoviesRepository
+import me.davidcosta.tmdb.data.repository.TvsRepository
 import me.davidcosta.tmdb.data.repository.WatchlistRepository
+import me.davidcosta.tmdb.enums.Keys
 
 @Suppress("UNCHECKED_CAST")
-class HighlightViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class HighlightTvViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HighlightViewModel::class.java)) {
-            return HighlightViewModel(
-                    moviesRepository = MoviesRepository(
+        if (modelClass.isAssignableFrom(HighlightTvViewModel::class.java)) {
+            return HighlightTvViewModel(
+                    tvsRepository = TvsRepository(
                         api = ApiService.instance
                     ),
                     watchlistRepository = WatchlistRepository(
                         api = ApiService.instance,
                         mediaDao = Room.databaseBuilder(
                             context,
-                            AppDatabase::class.java, "database-watchlist"
+                            AppDatabase::class.java, Keys.ROOM_DATABASE_NAME.value
                         ).allowMainThreadQueries().build().mediaDao()
                     )
             ) as T

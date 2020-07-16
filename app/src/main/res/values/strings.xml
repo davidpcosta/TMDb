@@ -188,13 +188,21 @@
     <string name="language_zh">Chinês</string>
     <string name="language_zu">Zulu</string>
 
-    <!-- STATUS -->
-    <string name="status_rumored">Rumores</string>
-    <string name="status_planned">Planejado</string>
-    <string name="status_in_production">Em produção</string>
-    <string name="status_post_production">Pós-produção</string>
-    <string name="status_released">Lançado</string>
-    <string name="status_canceled">Cancelado</string>
+    <!-- MOVIE STATUS -->
+    <string name="movie_status_rumored">Rumores</string>
+    <string name="movie_status_planned">Planejado</string>
+    <string name="movie_status_in_production">Em produção</string>
+    <string name="movie_status_post_production">Pós-produção</string>
+    <string name="movie_status_released">Lançado</string>
+    <string name="movie_status_canceled">Cancelado</string>
+
+    <!-- TV STATUS -->
+    <string name="tv_status_returning_series">Renovada</string>
+    <string name="tv_status_ended">Finalizada</string>
+
+    <!-- TV TYPE -->
+    <string name="tv_type_scripted">Roteirizada</string>
+
 
     <!-- MAIN / HOME -->
     <string name="fragment_home_label_popular_movies">Filmes Populares</string>
@@ -234,11 +242,8 @@
     <string name="activity_highlight_message_added_to_watchlist">"Filme adicionado à sua lista"</string>
     <string name="activity_highlight_message_removed_from_watchlist">Filme removido da sua lista</string>
 
-    <!-- CONSTANTS -->
-    <string name="const_shared_preference">user_login</string>
-    <string name="const_key_account_id">account_id</string>
-    <string name="const_key_session_id">session_id</string>
-    <string name="const_key_media">media</string>
+    <string name="activity_highlight_tv_value_seasons_count_singular">%1$d temporadas</string>
+    <string name="activity_highlight_tv_value_seasons_count_plural">%1$d temporadas</string>
 
 
 </resources>

@@ -1,11 +1,8 @@
 package me.davidcosta.tmdb.data.model
 
-data class Generes (
-    var genres: List<Genre>
-)
+import com.google.gson.annotations.SerializedName
 
 data class Genre (
-    var id: Long,
-    var name: String,
-    var movies: List<Movie>?
+    @SerializedName("id") var id: Long,
+    @SerializedName("name") var name: String
 )

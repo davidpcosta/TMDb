@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
-import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.enums.Keys
+import me.davidcosta.tmdb.enums.MediaType
 import me.davidcosta.tmdb.extensions.loadPoster
 import me.davidcosta.tmdb.extensions.toast
-import me.davidcosta.tmdb.ui.highlight.HighlightActivity
+import me.davidcosta.tmdb.ui.highlight.movie.HighlightMovieActivity
+import me.davidcosta.tmdb.ui.highlight.tv.HighlightTvActivity
 
 class MovieRecycleViewAdapter(
     private val applicationContext: Context
@@ -47,7 +48,7 @@ class MovieRecycleViewAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            goToMovie(media)
+            goToMedia(media)
         }
 
         holder.itemView.setOnLongClickListener {
@@ -56,10 +57,16 @@ class MovieRecycleViewAdapter(
         }
     }
 
-    private fun goToMovie(media: Media) {
-        val intent = Intent(applicationContext, HighlightActivity::class.java)
-        intent.putExtra(applicationContext.getString(R.string.const_key_media), media)
-        applicationContext.startActivity(intent)
+    private fun goToMedia(media: Media) {
+        if (media.getMediaType == MediaType.MOVIE) {
+            val intent = Intent(applicationContext, HighlightMovieActivity::class.java)
+            intent.putExtra(Keys.EXTRAS_MEDIA.value, media)
+            applicationContext.startActivity(intent)
+        } else {
+            val intent = Intent(applicationContext, HighlightTvActivity::class.java)
+            intent.putExtra(Keys.EXTRAS_MEDIA.value, media)
+            applicationContext.startActivity(intent)
+        }
     }
 }
 

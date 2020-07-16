@@ -63,11 +63,12 @@
     <style name="Widget.MyTheme.Highlight.LabelValue">
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
         <item name="android:paddingBottom">8dp</item>
-        <item name="android:alpha">0.5</item>
+        <item name="android:alpha">0.6</item>
     </style>
 
     <style name="Widget.MyTheme.Highlight.Body">
-        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:alpha">0.6</item>
     </style>
 
     <style name="Widget.MyTheme.Button" />
