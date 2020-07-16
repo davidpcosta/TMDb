@@ -104,189 +104,150 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_highlight_aditional_info"/>
 
-        <TextView
-            android:id="@+id/activity_highlight_label_overview"
-            style="@style/Widget.MyTheme.Highlight.SubTitle"
+        <LinearLayout
+            android:id="@+id/activity_highlight_congainer_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="@string/activity_highlight_label_overview"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_button_add_to_watchlist" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_button_add_to_watchlist">
 
-        <TextView
-            android:id="@+id/activity_highlight_overview"
-            style="@style/Widget.MyTheme.Highlight.Body"
-            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+            <TextView
+                android:id="@+id/activity_highlight_label_overview"
+                style="@style/Widget.MyTheme.Highlight.SubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_highlight_label_overview" />
+
+            <TextView
+                android:id="@+id/activity_highlight_overview"
+                style="@style/Widget.MyTheme.Highlight.Body"
+                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@id/activity_highlight_label_overview" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_congainer_overview">
 
-        <TextView
-            android:id="@+id/activity_highlight_label_details"
-            style="@style/Widget.MyTheme.Highlight.SubTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="@string/activity_highlight_label_more_details"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_overview" />
+            <TextView
+                android:id="@+id/activity_highlight_label_details"
+                style="@style/Widget.MyTheme.Highlight.SubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_highlight_label_more_details"/>
 
-        <!-- Original Title -->
+            <!-- Original Title -->
+            <TextView
+                android:id="@+id/activity_highlight_label_original_title"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_original_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_label_original_title"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_original_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_details" />
+            <TextView
+                android:id="@+id/activity_highlight_original_title"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="Resident Evil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_original_title"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="Resident Evil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_original_title" />
+            <!-- Genres -->
+            <TextView
+                android:id="@+id/activity_highlight_label_genres"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- Genres -->
+            <TextView
+                android:id="@+id/activity_highlight_genres"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="Ação, Aventura, Drama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_label_genres"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_genres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_original_title" />
+            <!-- Release Date -->
+            <TextView
+                android:id="@+id/activity_highlight_label_release_date"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_genres"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="Ação, Aventura, Drama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_genres" />
+            <TextView
+                android:id="@+id/activity_highlight_release_date"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="26/04/2000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- Release Date -->
+            <!-- Original Language -->
+            <TextView
+                android:id="@+id/activity_highlight_label_original_language"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_original_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_label_release_date"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_release_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_genres" />
+            <TextView
+                android:id="@+id/activity_highlight_original_language"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="Inglês"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_release_date"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="26/04/2000"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_release_date" />
+            <!-- Status -->
+            <TextView
+                android:id="@+id/activity_highlight_label_status"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- Original Language -->
+            <TextView
+                android:id="@+id/activity_highlight_status"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="Lançado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_label_original_language"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_original_language"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_release_date" />
+            <!-- Budget -->
+            <TextView
+                android:id="@+id/activity_highlight_label_budget"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_budged"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_original_language"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="Inglês"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_original_language" />
+            <TextView
+                android:id="@+id/activity_highlight_budget"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="$ 8.000.000,00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- Status -->
+            <!-- Revenue -->
+            <TextView
+                android:id="@+id/activity_highlight_label_revenue"
+                style="@style/Widget.MyTheme.Highlight.Label"
+                android:text="@string/activity_highlight_label_revenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/activity_highlight_label_status"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_original_language" />
-
-        <TextView
-            android:id="@+id/activity_highlight_status"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="Lançado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_status" />
-
-        <!-- Budget -->
-
-        <TextView
-            android:id="@+id/activity_highlight_label_budget"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_budged"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_status" />
-
-        <TextView
-            android:id="@+id/activity_highlight_budget"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="$ 8.000.000,00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_budget" />
-
-        <!-- Revenue -->
-
-        <TextView
-            android:id="@+id/activity_highlight_label_revenue"
-            style="@style/Widget.MyTheme.Highlight.Label"
-            android:text="@string/activity_highlight_label_revenue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_budget" />
-
-        <TextView
-            android:id="@+id/activity_highlight_revenue"
-            style="@style/Widget.MyTheme.Highlight.LabelValue"
-            tools:text="$ 8.000.000,00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_label_revenue" />
+            <TextView
+                android:id="@+id/activity_highlight_revenue"
+                style="@style/Widget.MyTheme.Highlight.LabelValue"
+                tools:text="$ 8.000.000,00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

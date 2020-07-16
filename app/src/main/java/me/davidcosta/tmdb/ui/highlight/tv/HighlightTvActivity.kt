@@ -12,7 +12,6 @@ import me.davidcosta.tmdb.data.model.Media
 import me.davidcosta.tmdb.data.model.Tv
 import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.enums.Language
-import me.davidcosta.tmdb.enums.MovieStatus
 import me.davidcosta.tmdb.enums.TvStatus
 import me.davidcosta.tmdb.extensions.*
 

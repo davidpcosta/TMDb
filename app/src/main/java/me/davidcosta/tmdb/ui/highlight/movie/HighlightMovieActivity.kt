@@ -7,17 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_highlight_movie.*
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_backdrop
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_button_add_to_watchlist
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_genres
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_label_overview
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_original_language
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_original_title
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_overview
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_poster
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_release_date
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_status
-import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_vote_avarege
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.data.model.Movie
 import me.davidcosta.tmdb.data.model.Media
