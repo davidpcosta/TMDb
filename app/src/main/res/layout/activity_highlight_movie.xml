@@ -12,7 +12,7 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/activity_highlight_backdrop"
+            android:id="@+id/activity_highlight_movie_backdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
@@ -21,20 +21,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_button_add_to_watchlist" />
+            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_movie_button_add_to_watchlist" />
 
         <View
-            android:id="@+id/activity_highlight_backdrop_gradient"
+            android:id="@+id/activity_highlight_movie_backdrop_gradient"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/shape_backdrop_gradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_button_add_to_watchlist" />
+            app:layout_constraintBottom_toBottomOf="@id/activity_highlight_movie_button_add_to_watchlist" />
 
         <ImageView
-            android:id="@+id/activity_highlight_poster"
+            android:id="@+id/activity_highlight_movie_poster"
             android:layout_width="150dp"
             android:layout_height="225dp"
             android:layout_marginTop="48dp"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/activity_highlight_aditional_info"
+            android:id="@+id/activity_highlight_movie_info_headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -54,10 +54,10 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_highlight_poster" >
+            app:layout_constraintTop_toBottomOf="@id/activity_highlight_movie_poster" >
 
             <TextView
-                android:id="@+id/activity_highlight_vote_avarege"
+                android:id="@+id/activity_highlight_movie_vote_avarege"
                 style="@style/Widget.MyTheme.Highlight.VoteAvarege"
                 tools:text="Nota: 6,1"
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/activity_highlight_year"
+                android:id="@+id/activity_highlight_movie_year"
                 style="@style/Widget.MyTheme.Highlight.Year"
                 tools:text="2020"
                 android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/activity_highlight_runtime"
+                android:id="@+id/activity_highlight_movie_runtime"
                 style="@style/Widget.MyTheme.Highlight.Runtime"
                 tools:text="2h 21m"
                 android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/activity_highlight_button_add_to_watchlist"
+            android:id="@+id/activity_highlight_movie_button_add_to_watchlist"
             style="@style/Widget.MyTheme.Button.Primary"
             app:icon="@drawable/ic_add_black_24dp"
             android:layout_width="wrap_content"
@@ -102,153 +102,47 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_highlight_aditional_info"/>
+            app:layout_constraintTop_toBottomOf="@id/activity_highlight_movie_info_headline"/>
 
         <LinearLayout
-            android:id="@+id/activity_highlight_congainer_overview"
+            android:id="@+id/activity_highlight_movie_container_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_button_add_to_watchlist">
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_movie_button_add_to_watchlist">
 
             <TextView
-                android:id="@+id/activity_highlight_label_overview"
+                android:id="@+id/activity_highlight_movie_label_overview"
                 style="@style/Widget.MyTheme.Highlight.SubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/activity_highlight_label_overview" />
 
             <TextView
-                android:id="@+id/activity_highlight_overview"
+                android:id="@+id/activity_highlight_movie_overview"
                 style="@style/Widget.MyTheme.Highlight.Body"
                 tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <LinearLayout
+        <fragment
+            android:id="@+id/activity_highlight_movie_cast"
+            android:name="me.davidcosta.tmdb.ui.highlight.CastRailFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_movie_container_overview" />
+
+        <fragment
+            android:id="@+id/activity_highlight_movie_more_details"
+            android:name="me.davidcosta.tmdb.ui.highlight.MoreDetailsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_congainer_overview">
-
-            <TextView
-                android:id="@+id/activity_highlight_label_details"
-                style="@style/Widget.MyTheme.Highlight.SubTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/activity_highlight_label_more_details"/>
-
-            <!-- Original Title -->
-            <TextView
-                android:id="@+id/activity_highlight_label_original_title"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_original_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_original_title"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="Resident Evil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Genres -->
-            <TextView
-                android:id="@+id/activity_highlight_label_genres"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_genres"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_genres"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="Ação, Aventura, Drama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Release Date -->
-            <TextView
-                android:id="@+id/activity_highlight_label_release_date"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_release_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_release_date"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="26/04/2000"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Original Language -->
-            <TextView
-                android:id="@+id/activity_highlight_label_original_language"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_original_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_original_language"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="Inglês"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Status -->
-            <TextView
-                android:id="@+id/activity_highlight_label_status"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_status"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="Lançado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Budget -->
-            <TextView
-                android:id="@+id/activity_highlight_label_budget"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_budged"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_budget"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="$ 8.000.000,00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Revenue -->
-            <TextView
-                android:id="@+id/activity_highlight_label_revenue"
-                style="@style/Widget.MyTheme.Highlight.Label"
-                android:text="@string/activity_highlight_label_revenue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_highlight_revenue"
-                style="@style/Widget.MyTheme.Highlight.LabelValue"
-                tools:text="$ 8.000.000,00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
+            app:layout_constraintTop_toBottomOf="@+id/activity_highlight_movie_cast" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

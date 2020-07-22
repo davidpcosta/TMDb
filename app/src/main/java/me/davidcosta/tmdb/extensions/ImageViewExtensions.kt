@@ -7,6 +7,12 @@ import jp.wasabeef.picasso.transformations.BlurTransformation
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
 
+fun ImageView.loadProfilePicture(context: Context, path: String) =
+    Picasso.with(context)
+        .load(BuildConfig.TMDB_IMAGE_URL + path)
+        .placeholder(R.drawable.avatar_placeholder)
+        .into(this)
+
 fun ImageView.loadPoster(context: Context, path: String) =
     Picasso.with(context)
         .load(BuildConfig.TMDB_IMAGE_URL + path)

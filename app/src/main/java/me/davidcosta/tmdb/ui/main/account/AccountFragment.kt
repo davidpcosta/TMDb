@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main_fragment_account.view.*
+import kotlinx.android.synthetic.main.fragment_account.view.*
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.enums.Keys
@@ -28,7 +28,7 @@ class AccountFragment : Fragment() {
     private lateinit var sessionId: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.activity_main_fragment_account, container, false)
+        val view = inflater.inflate(R.layout.fragment_account, container, false)
 
         accountViewModel = ViewModelProvider(this, AccountViewModelFactory()).get(AccountViewModel::class.java)
         sharedPreferences = requireActivity().getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)

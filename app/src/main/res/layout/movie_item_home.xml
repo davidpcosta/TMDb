@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
     tools:layout_width="100dp"
     tools:layout_height="150dp">
 
@@ -13,7 +15,6 @@
         android:layout_height="match_parent"
         tools:layout_width="100dp"
         tools:layout_height="150dp"
-        android:layout_margin="2dp"
         android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -71,14 +71,15 @@ dependencies {
 
     // Room
     implementation 'androidx.room:room-runtime:2.2.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "android.arch.persistence.room:compiler:1.1.1"
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
 
     // Interceptor para visualizar os logs das requisições do Retrofit
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.8'
 
     // Picasso
     implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.5.2'

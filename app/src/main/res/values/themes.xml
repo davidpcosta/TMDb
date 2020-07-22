@@ -8,14 +8,6 @@
     <style name="Theme.MyApp.NoActionBar" parent="Base.Theme.MyApp.NoActionBar" />
     <style name="Theme.MyApp.ActionBar.Transparent" parent="Base.Theme.MyApp.ActionBar.Transparent" />
 
-    <!-- TMDb Dark Theme -->
-    <style name="Theme.TMDbTheme.Dark" parent="Theme.TMDbTheme">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorSecondary">@color/black</item>
-        <item name="colorSecondaryVariant">@color/black</item>
-    </style>
-
     <!-- TMDb Theme -->
     <style name="Theme.TMDbTheme" parent="Base.Theme.MyApp">
         <item name="colorPrimary">@color/tmdb_dark_blue</item>
@@ -26,6 +18,15 @@
 
         <item name="colorAccent">@color/tmdb_light_green</item>
         <item name="android:colorBackground">@color/tmdb_dark_blue</item>
+    </style>
+
+    <!-- TMDb Dark Theme -->
+    <style name="Theme.TMDbTheme.Dark" parent="Theme.TMDbTheme">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
     </style>
 
     <style name="Theme.TMDbTheme.FullScreen">

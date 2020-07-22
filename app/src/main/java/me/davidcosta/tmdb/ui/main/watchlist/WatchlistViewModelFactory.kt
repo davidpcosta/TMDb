@@ -16,10 +16,10 @@ class WatchlistViewModelFactory(private val context: Context) : ViewModelProvide
             return WatchlistViewModel(
                     watchlistRepository = WatchlistRepository(
                         api = ApiService.instance,
-                        mediaDao = Room.databaseBuilder(
+                        watchlistDao= Room.databaseBuilder(
                             context,
                             AppDatabase::class.java, "database-watchlist"
-                        ).allowMainThreadQueries().build().mediaDao()
+                        ).allowMainThreadQueries().build().watchlistDat()
                     )
             ) as T
         }

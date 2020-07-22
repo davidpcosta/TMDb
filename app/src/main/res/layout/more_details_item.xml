@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="@color/black"
+    android:theme="@style/Theme.MyApp">
+
+    <TextView
+        android:id="@+id/more_details_item_label"
+        style="@style/Widget.MyTheme.Highlight.Label"
+        android:text="@string/fragment_more_details_label_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/more_details_item_value"
+        style="@style/Widget.MyTheme.Highlight.LabelValue"
+        tools:text="Lançado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

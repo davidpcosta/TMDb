@@ -7,10 +7,10 @@ import me.davidcosta.tmdb.enums.MediaType
 import me.davidcosta.tmdb.extensions.toEnum
 import java.io.Serializable
 
-
-@Entity()
+@Entity(tableName = "watchlist")
 data class Media(
-    @PrimaryKey @SerializedName("id") var id: Long,
+    @PrimaryKey var pk: String,
+    @SerializedName("id") var id: Long,
     @SerializedName("name") var name: String?,
     @SerializedName("original_name") var originalName: String?,
     @SerializedName("title") var title: String?,
@@ -20,6 +20,12 @@ data class Media(
     @SerializedName("poster_path") var posterPath: String?,
     @SerializedName("media_type") var mediaType: String?
 ) : Serializable {
+
+    fun lazyInit(): Media {
+        defineMediaType()
+        definePrimaryKey()
+        return this
+    }
 
     @Transient
     private var mMediaType: MediaType? = null
@@ -58,5 +64,9 @@ data class Media(
             mMediaType = MediaType.TV
             return
         }
+    }
+
+    private fun definePrimaryKey() {
+        pk = "${mMediaType?.name}-$id"
     }
 }

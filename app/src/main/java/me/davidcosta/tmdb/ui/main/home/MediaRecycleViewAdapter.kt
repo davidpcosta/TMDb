@@ -16,9 +16,9 @@ import me.davidcosta.tmdb.extensions.toast
 import me.davidcosta.tmdb.ui.highlight.movie.HighlightMovieActivity
 import me.davidcosta.tmdb.ui.highlight.tv.HighlightTvActivity
 
-class MovieRecycleViewAdapter(
+class MediaRecycleViewAdapter(
     private val applicationContext: Context
-): RecyclerView.Adapter<MovieRecycleViewAdapter.ViewHolder>() {
+): RecyclerView.Adapter<MediaRecycleViewAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
     var medias: List<Media> = ArrayList()

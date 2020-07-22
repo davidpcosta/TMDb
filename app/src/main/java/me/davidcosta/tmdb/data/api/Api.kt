@@ -1,9 +1,11 @@
 package me.davidcosta.tmdb.data.api
 
+import kotlinx.coroutines.Deferred
 import me.davidcosta.tmdb.BuildConfig
 import me.davidcosta.tmdb.data.model.*
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.*
 
 interface Api {
 
@@ -73,22 +75,14 @@ interface Api {
     fun movieGenres(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<Genres>
-
-    @GET("discover/movie")
-    fun moviesByGenre(
-        @Query("with_genres") genreId: Long,
-        @Query("include_adult") includeAdults: Boolean = false,
-        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
-        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Media>>
+    ): Deferred<Genres>
 
     @GET("movie/{movie_id}")
     fun movieDetails(
         @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<Movie>
+    ): Deferred<Movie>
 
     @GET("movie/{movie_id}/similar")
     fun similarMovies(
@@ -96,19 +90,13 @@ interface Api {
         @Query("include_adult") includeAdults: Boolean = false,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Media>>
+    ): Deferred<PagedResult<Media>>
 
     @GET("movie/{movieId}/credits")
     fun movieCredits(
         @Path("movieId") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
-    ): Call<Credits>
-
-    @GET("movie/popular")
-    fun moviesPopular(
-        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
-        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Media>>
+    ): Deferred<Credits>
 
     /******************************************
      * TV
@@ -118,18 +106,51 @@ interface Api {
     fun tvGenres(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<Genres>
+    ): Deferred<Genres>
 
     @GET("tv/{tv_id}")
     fun tvDetails(
         @Path("tv_id") tvId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<Tv>
+    ): Deferred<Tv>
+
+    @GET("tv/{tvId}/credits")
+    fun tvsCredits(
+        @Path("tvId") tvId: Long,
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
+    ): Deferred<Credits>
+
+    /******************************************
+     * HOME
+     ******************************************/
+
+    @GET("discover/movie")
+    fun moviesDiscover(
+        @Query("with_genres") genreId: Long? = null,
+        @Query("primary_release_date.gte") primaryReleaseDateStart: String? = null,
+        @Query("primary_release_date.lte") primaryReleaseDateEnd: String? = null,
+        @Query("sort_by") sortBy: String? = null,
+        @Query("include_adult") includeAdults: Boolean = false,
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Deferred<PagedResult<Media>>
 
     @GET("tv/popular")
     fun tvsPopular(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
-    ): Call<PagedResult<Media>>
+    ): Deferred<PagedResult<Media>>
+
+    @GET("movie/popular")
+    fun moviesPopular(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Deferred<PagedResult<Media>>
+
+    @GET("trending/all/day")
+    fun trending(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Deferred<PagedResult<Media>>
 }

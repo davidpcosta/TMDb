@@ -22,6 +22,8 @@ object ApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.TMDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(httpClient.build())
             .build()
 

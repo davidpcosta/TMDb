@@ -8,12 +8,12 @@ import androidx.room.Query
 import me.davidcosta.tmdb.data.model.Media
 
 @Dao
-interface MediaDao {
-    @Query("SELECT * FROM media")
+interface WatchlistDao {
+    @Query("SELECT * FROM watchlist")
     fun getAll(): List<Media>
 
-    @Query("SELECT * FROM media WHERE id = :id ")
-    fun findById(id: Long): Media?
+    @Query("SELECT * FROM watchlist WHERE pk = :pk ")
+    fun findById(pk: String): Media?
 
     @Insert(onConflict = REPLACE)
     fun insertAll(medias: List<Media>)
@@ -24,6 +24,6 @@ interface MediaDao {
     @Delete
     fun delete(media: Media)
 
-    @Query("DELETE FROM media")
+    @Query("DELETE FROM watchlist")
     fun deleteAll()
 }

@@ -22,10 +22,10 @@ class HighlightTvViewModelFactory(private val context: Context) : ViewModelProvi
                     ),
                     watchlistRepository = WatchlistRepository(
                         api = ApiService.instance,
-                        mediaDao = Room.databaseBuilder(
+                        watchlistDao = Room.databaseBuilder(
                             context,
                             AppDatabase::class.java, Keys.ROOM_DATABASE_NAME.value
-                        ).allowMainThreadQueries().build().mediaDao()
+                        ).allowMainThreadQueries().build().watchlistDat()
                     )
             ) as T
         }

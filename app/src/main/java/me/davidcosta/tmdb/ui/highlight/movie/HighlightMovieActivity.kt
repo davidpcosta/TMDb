@@ -1,5 +1,6 @@
 package me.davidcosta.tmdb.ui.highlight.movie
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -7,118 +8,115 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_highlight_movie.*
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_backdrop
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_button_add_to_watchlist
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_label_overview
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_overview
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_poster
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_more_details
+import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_vote_avarege
+import kotlinx.android.synthetic.main.activity_highlight_tv.*
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Movie
+import me.davidcosta.tmdb.base.BaseActivity
+import me.davidcosta.tmdb.data.model.Credits
 import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.data.model.Movie
 import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.enums.Language
 import me.davidcosta.tmdb.enums.MovieStatus
 import me.davidcosta.tmdb.extensions.*
+import me.davidcosta.tmdb.ui.highlight.CastRailFragment
+import me.davidcosta.tmdb.ui.highlight.MoreDetailsFragment
 
 
-class HighlightMovieActivity : AppCompatActivity() {
+class HighlightMovieActivity : BaseActivity() {
 
-    private lateinit var highlightViewModel: HighlightMovieViewModel
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var highlightMovieViewModel: HighlightMovieViewModel
     private lateinit var media: Media
-    private var sessionId: String? = null
-    private var accountId: Long = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_highlight_movie)
+    override fun resourceView() =
+        R.layout.activity_highlight_movie
 
-        highlightViewModel = ViewModelProvider(this,
+    override fun setupView() {
+
+        highlightMovieViewModel = ViewModelProvider(this,
             HighlightMovieViewModelFactory(this)
         ).get(HighlightMovieViewModel::class.java)
+
         media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as Media
-        sharedPreferences = getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)
-        sessionId = sharedPreferences.getString(Keys.PREFERENCES_ACCOUNT_ID.value, null)
-        accountId = sharedPreferences.getLong(Keys.PREFERENCES_SESSION_ID.value, 0)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        activity_highlight_button_add_to_watchlist.setOnClickListener {
+        activity_highlight_movie_button_add_to_watchlist.setOnClickListener {
             this.handleWatchlistButtonClicked()
         }
 
-        initComponents()
-        setViewData()
-        fetchMovieDetails()
-        fetchMovieCast()
-    }
-
-    private fun initComponents() {
-        highlightViewModel.isOnWatchlist(media)
-        highlightViewModel.isOnWatchlist.observe(this, Observer {
+        highlightMovieViewModel.isOnWatchlist(media)
+        highlightMovieViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
-                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
+                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
             } else {
-                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
+                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
 
             }
         })
+
+        setViewData()
+        fetchMovieDetails()
+        fetchMovieCredits()
     }
 
-    fun handleWatchlistButtonClicked() {
-        if (highlightViewModel.isOnWatchlist.value == false) {
-            highlightViewModel.addToWatchlist(accountId, sessionId, media)
-                .observe(this, Observer {
-                    if (it.statusCode == 1 || it.statusCode == 12) {
-                        highlightViewModel.isOnWatchlist(media)
-                        toast(getString(R.string.activity_highlight_message_added_to_watchlist))
-                    }
-                })
+    private fun handleWatchlistButtonClicked() {
+        if (!highlightMovieViewModel.isOnWatchlist(media)) {
+            highlightMovieViewModel.addToWatchlist(media)
+            toast(getString(R.string.activity_highlight_message_added_to_watchlist))
         } else {
-            highlightViewModel.removeFromWatchlist(accountId, sessionId, media)
-                .observe(this, Observer {
-                    if (it.statusCode == 13) {
-                        highlightViewModel.isOnWatchlist(media)
-                        toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
-                    }
-                })
+            highlightMovieViewModel.removeFromWatchlist(media)
+            toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
         }
     }
 
     private fun setViewData() {
-        media.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
-        media.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
+        media.posterPath?.let { activity_highlight_movie_poster.loadPoster(applicationContext, it) }
+        media.backdropPath?.let { activity_highlight_movie_backdrop.loadBackdrop(applicationContext, it) }
 
         if (media.overview.isNullOrBlank()) {
-            activity_highlight_label_overview.hide()
-            activity_highlight_overview.hide()
+            activity_highlight_movie_label_overview.hide()
+            activity_highlight_movie_overview.hide()
         } else {
-            activity_highlight_overview.show()
-            activity_highlight_overview.text = media.overview
-        }    }
+            activity_highlight_movie_overview.show()
+            activity_highlight_movie_overview.text = media.overview
+        }
+    }
 
 
+    @SuppressLint("StringFormatMatches")
     private fun fetchMovieDetails() {
-        highlightViewModel.movieDetails(media.id)
-        highlightViewModel.movieDetails.observe(this, Observer<Movie> {
-            activity_highlight_vote_avarege.text = getString(
+        highlightMovieViewModel.movieDetails(media.id)
+        highlightMovieViewModel.movieDetails.observe(this, Observer<Movie> { movie ->
+            activity_highlight_movie_vote_avarege.text = getString(
                 R.string.activity_highlight_value_vote_average,
-                (it.voteAverage * 10).toInt()
+                (movie.voteAverage * 10).toInt()
             )
-            activity_highlight_runtime.text = getString(
-                R.string.activity_highlight_value_runtime,
-                it.runtime
-            )
-            activity_highlight_year.text = it.releaseDate.toYearFormat()
-            activity_highlight_genres.text = it.genres.toStringList()
 
-            activity_highlight_original_title.text = it.originalTitle
-            activity_highlight_release_date.text = it.releaseDate.toLongFormat()
-            activity_highlight_original_language.text = getLanguage(it.originalLanguage)
-            activity_highlight_status.text = getStatus(it.status)
-            activity_highlight_budget.text = getString(R.string.activity_highlight_value_money, it.budget)
-            activity_highlight_revenue.text = getString(R.string.activity_highlight_value_money, it.revenue)
+            val runtime = movie.runtime.toRuntime()
+            activity_highlight_movie_runtime.text = getString(
+                R.string.activity_highlight_value_runtime,
+                runtime.first,
+                runtime.second
+            )
+            activity_highlight_movie_year.text = movie.releaseDate.toYearFormat()
+
+            setMoreDetailsData(movie)
         })
     }
 
-    private fun fetchMovieCast() {
-        // TODO(Implement)
+    private fun fetchMovieCredits() {
+        highlightMovieViewModel.fetchCredits(media.id)
+        highlightMovieViewModel.credits.observe(this, Observer<Credits> { credits ->
+            setTopBilledCast(credits)
+        })
     }
 
     private fun getLanguage(value: String): String {
@@ -135,6 +133,27 @@ class HighlightMovieActivity : AppCompatActivity() {
         } catch(e: Exception) {
             value
         }
+    }
+
+    private fun setMoreDetailsData(movie: Movie) {
+        val moreDetailsFragment = activity_highlight_movie_more_details as MoreDetailsFragment
+        moreDetailsFragment.setItems(
+            listOf(
+                Pair(getString(R.string.fragment_more_details_label_original_title), movie.originalTitle),
+                Pair(getString(R.string.fragment_more_details_label_genres), movie.genres.toStringList()),
+                Pair(getString(R.string.fragment_more_details_label_release_date), movie.releaseDate.toLongFormat()),
+                Pair(getString(R.string.fragment_more_details_label_original_language), getLanguage(movie.originalLanguage)),
+                Pair(getString(R.string.fragment_more_details_label_status), getStatus(movie.status)),
+                Pair(getString(R.string.fragment_more_details_label_budged), getString(R.string.activity_highlight_value_money, movie.budget)),
+                Pair(getString(R.string.fragment_more_details_label_revenue), getString(R.string.activity_highlight_value_money, movie.revenue))
+            )
+        )
+    }
+
+    private fun setTopBilledCast(credits: Credits) {
+        val castRailFragment = activity_highlight_movie_cast as CastRailFragment
+        val size = if (credits.cast.size > 10) 10 else credits.cast.size
+        castRailFragment.setCast(credits.cast.subList(0, size))
     }
 
 }

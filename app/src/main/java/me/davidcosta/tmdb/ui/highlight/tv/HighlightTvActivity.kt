@@ -1,101 +1,92 @@
 package me.davidcosta.tmdb.ui.highlight.tv
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.AdapterView
+import android.widget.GridView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_highlight_tv.*
 import me.davidcosta.tmdb.R
+import me.davidcosta.tmdb.base.BaseActivity
+import me.davidcosta.tmdb.data.model.Credits
 import me.davidcosta.tmdb.data.model.Media
 import me.davidcosta.tmdb.data.model.Tv
 import me.davidcosta.tmdb.enums.Keys
 import me.davidcosta.tmdb.enums.Language
 import me.davidcosta.tmdb.enums.TvStatus
 import me.davidcosta.tmdb.extensions.*
+import me.davidcosta.tmdb.ui.highlight.CastRailFragment
+import me.davidcosta.tmdb.ui.highlight.MoreDetailsFragment
+import me.davidcosta.tmdb.ui.main.watchlist.MovieAdapter
 
 
-class HighlightTvActivity : AppCompatActivity() {
+class HighlightTvActivity : BaseActivity() {
 
     private lateinit var highlightViewModel: HighlightTvViewModel
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var media: Media
-    private var sessionId: String? = null
-    private var accountId: Long = 0
+    private lateinit var createdByGrid: GridView
+    private lateinit var createdByAdapter: CreatedByAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_highlight_tv)
+    override fun resourceView() =
+        R.layout.activity_highlight_tv
 
+    override fun setupView() {
         highlightViewModel = ViewModelProvider(this, HighlightTvViewModelFactory(this)).get(HighlightTvViewModel::class.java)
         media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as Media
-        sharedPreferences = getSharedPreferences(Keys.PREFERENCES_USER_LOGIN.value, Context.MODE_PRIVATE)
-        sessionId = sharedPreferences.getString(Keys.PREFERENCES_ACCOUNT_ID.value, null)
-        accountId = sharedPreferences.getLong(Keys.PREFERENCES_SESSION_ID.value, 0)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        activity_highlight_button_add_to_watchlist.setOnClickListener {
+        activity_highlight_tv_button_add_to_watchlist.setOnClickListener {
             this.handleWatchlistButtonClicked()
         }
 
-        initComponents()
-        setViewData()
-        fetchTvDetails()
-    }
+        createdByAdapter = CreatedByAdapter(applicationContext)
+        activity_highlight_tv_created_by .apply {
+            adapter = createdByAdapter
+        }
 
-    private fun initComponents() {
         highlightViewModel.isOnWatchlist(media)
         highlightViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
-                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
+                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
             } else {
-                activity_highlight_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
+                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
 
             }
         })
+
+        setViewData()
+        fetchTvDetails()
+        fetchTvCredits()
     }
 
-    fun handleWatchlistButtonClicked() {
-        if (highlightViewModel.isOnWatchlist.value == false) {
-            highlightViewModel.addToWatchlist(accountId, sessionId, media)
-                .observe(this, Observer {
-                    if (it.statusCode == 1 || it.statusCode == 12) {
-                        highlightViewModel.isOnWatchlist(media)
-                        toast(getString(R.string.activity_highlight_message_added_to_watchlist))
-                    }
-                })
+    private fun handleWatchlistButtonClicked() {
+        if (highlightViewModel.isOnWatchlist(media)) {
+            highlightViewModel.removeFromWatchlist(media)
+            toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
         } else {
-            highlightViewModel.removeFromWatchlist(accountId, sessionId, media)
-                .observe(this, Observer {
-                    if (it.statusCode == 13) {
-                        highlightViewModel.isOnWatchlist(media)
-                        toast(getString(R.string.activity_highlight_message_removed_from_watchlist))
-                    }
-                })
+            highlightViewModel.addToWatchlist(media)
+            toast(getString(R.string.activity_highlight_message_added_to_watchlist))
         }
     }
 
     private fun setViewData() {
-        media.posterPath?.let { activity_highlight_poster.loadPoster(applicationContext, it) }
-        media.backdropPath?.let { activity_highlight_backdrop.loadBackdrop(applicationContext, it) }
+        media.posterPath?.let { activity_highlight_tv_poster.loadPoster(applicationContext, it) }
+        media.backdropPath?.let { activity_highlight_tv_backdrop.loadBackdrop(applicationContext, it) }
 
         if (media.overview.isNullOrBlank()) {
-            activity_highlight_label_overview.hide()
-            activity_highlight_overview.hide()
+            activity_highlight_tv_label_overview.hide()
+            activity_highlight_tv_overview.hide()
         } else {
-            activity_highlight_overview.show()
-            activity_highlight_overview.text = media.overview
+            activity_highlight_tv_overview.show()
+            activity_highlight_tv_overview.text = media.overview
         }
     }
 
-
     private fun fetchTvDetails() {
         highlightViewModel.tvDetails(media.id)
-        highlightViewModel.tv.observe(this, Observer<Tv> {tv ->
-            activity_highlight_vote_avarege.text = getString(
+        highlightViewModel.tvDetails.observe(this, Observer<Tv> { tv ->
+            activity_highlight_tv_vote_avarege.text = getString(
                 R.string.activity_highlight_value_vote_average,
                 (tv.voteAverage * 10).toInt()
             )
@@ -107,12 +98,20 @@ class HighlightTvActivity : AppCompatActivity() {
                 },
                 tv.numberOfSeasons
             )
-            activity_highlight_genres.text = tv.genres.toStringList()
 
-            activity_highlight_original_title.text = tv.originalName
-            activity_highlight_release_date.text = tv.firstAirData.toLongFormat()
-            activity_highlight_original_language.text = getLanguage(tv.originalLanguage)
-            activity_highlight_status.text = getStatus(tv.status)
+            tv.createdBy?.let {
+                createdByAdapter.credits = it
+                createdByAdapter.notifyDataSetChanged()
+            }
+
+            setMoreDetailsData(tv)
+        })
+    }
+
+    private fun fetchTvCredits() {
+        highlightViewModel.fetchCredits(media.id)
+        highlightViewModel.credits.observe(this, Observer<Credits> { credits ->
+            setTopBilledCast(credits)
         })
     }
 
@@ -130,6 +129,25 @@ class HighlightTvActivity : AppCompatActivity() {
         } catch(e: Exception) {
             value
         }
+    }
+
+    private fun setMoreDetailsData(tv: Tv) {
+        val moreDetailsFragment = activity_highlight_tv_more_details as MoreDetailsFragment
+        moreDetailsFragment.setItems(
+            listOf(
+                Pair(getString(R.string.fragment_more_details_label_original_title), tv.originalName),
+                Pair(getString(R.string.fragment_more_details_label_genres), tv.genres.toStringList()),
+                Pair(getString(R.string.fragment_more_details_label_release_date), tv.firstAirData.toLongFormat()),
+                Pair(getString(R.string.fragment_more_details_label_original_language), getLanguage(tv.originalLanguage)),
+                Pair(getString(R.string.fragment_more_details_label_status), getStatus(tv.status))
+            )
+        )
+    }
+
+    private fun setTopBilledCast(credits: Credits) {
+        val castRailFragment = activity_highlight_tv_cast as CastRailFragment
+        val size = if (credits.cast.size > 10) 10 else credits.cast.size
+        castRailFragment.setCast(credits.cast.subList(0, size))
     }
 
 }

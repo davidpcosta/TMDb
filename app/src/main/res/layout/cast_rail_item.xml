@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:theme="@style/Theme.MyApp">
+
+    <ImageView
+        android:id="@+id/cast_rail_profile_picture"
+        android:scaleType="centerCrop"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/avatar_placeholder" />
+
+    <TextView
+        android:id="@+id/cast_rail_person_name"
+        style="@style/Widget.MyTheme.Highlight.Label"
+        tools:text="John Smith"
+        android:lines="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/cast_rail_character_name"
+        style="@style/Widget.MyTheme.Highlight.LabelValue"
+        tools:text="John Smith"
+        android:lines="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
