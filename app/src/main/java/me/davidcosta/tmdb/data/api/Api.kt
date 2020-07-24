@@ -130,6 +130,7 @@ interface Api {
         @Query("with_genres") genreId: Long? = null,
         @Query("primary_release_date.gte") primaryReleaseDateStart: String? = null,
         @Query("primary_release_date.lte") primaryReleaseDateEnd: String? = null,
+        @Query("with_release_type") withReleaseType: IntArray? = null,
         @Query("sort_by") sortBy: String? = null,
         @Query("include_adult") includeAdults: Boolean = false,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,

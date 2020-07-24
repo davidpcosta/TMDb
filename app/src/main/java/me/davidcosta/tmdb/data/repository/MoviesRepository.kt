@@ -1,6 +1,7 @@
 package me.davidcosta.tmdb.data.repository
 
 import me.davidcosta.tmdb.data.api.Api
+import me.davidcosta.tmdb.data.api.Params
 import me.davidcosta.tmdb.data.model.Credits
 import me.davidcosta.tmdb.data.model.Genre
 import me.davidcosta.tmdb.data.model.Media
@@ -42,31 +43,18 @@ class MoviesRepository(private val api: Api){
     }
 
     suspend fun upcoming(): List<Media> {
-        val startDate = Calendar.getInstance()
+        val startDate = Calendar.getInstance().apply {
+            add(Calendar.DATE, -21)
+        }
         val endDate = Calendar.getInstance().apply {
             add(Calendar.DATE, 7)
         }
 
-//        TODO: Create enum
-//        popularity.asc
-//        popularity.desc
-//        release_date.asc
-//        release_date.desc
-//        revenue.asc
-//        revenue.desc
-//        primary_release_date.asc
-//        primary_release_date.desc
-//        original_title.asc
-//        original_title.desc
-//        vote_average.asc
-//        vote_average.desc
-//        vote_count.asc
-//        vote_count.desc
-
         val deferred = api.moviesDiscover(
             primaryReleaseDateStart = startDate.time.toJsonFormat(),
             primaryReleaseDateEnd = endDate.time.toJsonFormat(),
-            sortBy = "popularity.desc"
+            withReleaseType = intArrayOf(Params.ReleaseType.Theatrical.value),
+            sortBy = Params.SortBy.PopularityDesc.value
         )
         return deferred.await().results.map {  it.lazyInit() }
     }

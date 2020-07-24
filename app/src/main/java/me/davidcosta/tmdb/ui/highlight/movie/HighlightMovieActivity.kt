@@ -1,10 +1,6 @@
 package me.davidcosta.tmdb.ui.highlight.movie
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_highlight_movie.*
@@ -15,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highligh
 import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_poster
 import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_more_details
 import kotlinx.android.synthetic.main.activity_highlight_movie.activity_highlight_movie_vote_avarege
-import kotlinx.android.synthetic.main.activity_highlight_tv.*
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.base.BaseActivity
 import me.davidcosta.tmdb.data.model.Credits
@@ -55,9 +50,9 @@ class HighlightMovieActivity : BaseActivity() {
         highlightMovieViewModel.isOnWatchlist(media)
         highlightMovieViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
-                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
+                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_done_24dp)
             } else {
-                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
+                activity_highlight_movie_button_add_to_watchlist.setIconResource(R.drawable.ic_add_24dp)
 
             }
         })

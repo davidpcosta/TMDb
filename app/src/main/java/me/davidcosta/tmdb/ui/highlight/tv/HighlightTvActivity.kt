@@ -1,6 +1,5 @@
 package me.davidcosta.tmdb.ui.highlight.tv
 
-import android.widget.AdapterView
 import android.widget.GridView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +15,6 @@ import me.davidcosta.tmdb.enums.TvStatus
 import me.davidcosta.tmdb.extensions.*
 import me.davidcosta.tmdb.ui.highlight.CastRailFragment
 import me.davidcosta.tmdb.ui.highlight.MoreDetailsFragment
-import me.davidcosta.tmdb.ui.main.watchlist.MovieAdapter
 
 
 class HighlightTvActivity : BaseActivity() {
@@ -48,9 +46,9 @@ class HighlightTvActivity : BaseActivity() {
         highlightViewModel.isOnWatchlist(media)
         highlightViewModel.isOnWatchlist.observe(this, Observer {
             if (it) {
-                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_done_black_24dp)
+                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_done_24dp)
             } else {
-                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_add_black_24dp)
+                activity_highlight_tv_button_add_to_watchlist.setIconResource(R.drawable.ic_add_24dp)
 
             }
         })
