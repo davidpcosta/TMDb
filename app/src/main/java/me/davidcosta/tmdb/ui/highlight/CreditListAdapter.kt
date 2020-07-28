@@ -1,48 +1,47 @@
 package me.davidcosta.tmdb.ui.highlight
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.cast_rail_item.view.*
+import kotlinx.android.synthetic.main.credit_list_item.view.*
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Cast
+import me.davidcosta.tmdb.data.entity.Person
 import me.davidcosta.tmdb.extensions.loadProfilePicture
 
-class CastRailAdapter(
+class CreditListAdapter(
     private val applicationContext: Context
-): RecyclerView.Adapter<CastRailAdapter.ViewHolder>() {
+): RecyclerView.Adapter<CreditListAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var cast: List<Cast> = ArrayList()
+    var persons: List<Person> = ArrayList()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val profilePicture = view.cast_rail_profile_picture as ImageView
-        val personName = view.cast_rail_person_name as TextView
-        val charactetName = view.cast_rail_character_name as TextView
+        val profilePicture = view.credit_list_profile_picture as ImageView
+        val personName = view.credit_list_person_name as TextView
+        val personRole = view.credit_list_person_role as TextView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = inflater.inflate(R.layout.cast_rail_item, parent, false)
+        val view: View = inflater.inflate(R.layout.credit_list_item, parent, false)
         return ViewHolder(
             view
         )
     }
 
     override fun getItemCount(): Int {
-        return cast.size
+        return persons.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val person = cast[position]
+        val person = persons[position]
 
         holder.personName.text = person.name
-        holder.charactetName.text = person.character
+        holder.personRole.text = person.role
         person.profilePath?.let {
             holder.profilePicture.loadProfilePicture(applicationContext, it)
             return

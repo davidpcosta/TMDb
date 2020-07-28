@@ -23,19 +23,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TMDbTheme.Dark" />
+        <activity
             android:name=".ui.highlight.movie.HighlightMovieActivity"
-            android:parentActivityName=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyApp.ActionBar.Transparent" />
         <activity
             android:name=".ui.highlight.tv.HighlightTvActivity"
-            android:parentActivityName=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyApp.ActionBar.Transparent" />
         <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.TMDbTheme.Dark" />
+            android:name="me.davidcosta.tmdb.ui.credits.CreditsActivity"
+            android:theme="@style/Theme.TMDbTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -14,8 +14,17 @@ abstract class BaseActivity : AppCompatActivity() {
 
         setupView()
 
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+        }
 
+//        actionBar?.let {
+//            it.onsele
+//        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

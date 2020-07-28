@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:theme="@style/Theme.MyApp">
+
+    <ImageView
+        android:id="@+id/credit_list_profile_picture"
+        android:scaleType="centerCrop"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/avatar_placeholder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/credit_list_person_name"
+        style="@style/Widget.MyTheme.Highlight.Label"
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/credit_list_profile_picture"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="John Smith" />
+
+    <TextView
+        android:id="@+id/credit_list_person_role"
+        style="@style/Widget.MyTheme.Highlight.LabelValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/credit_list_person_name"
+        app:layout_constraintStart_toStartOf="@+id/credit_list_person_name"
+        app:layout_constraintTop_toBottomOf="@+id/credit_list_person_name"
+        tools:text="John Smith" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

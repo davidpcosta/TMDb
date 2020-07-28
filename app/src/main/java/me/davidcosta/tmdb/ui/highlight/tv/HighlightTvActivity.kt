@@ -31,7 +31,6 @@ class HighlightTvActivity : BaseActivity() {
         highlightViewModel = ViewModelProvider(this, HighlightTvViewModelFactory(this)).get(HighlightTvViewModel::class.java)
         media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as Media
 
-        supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         activity_highlight_tv_button_add_to_watchlist.setOnClickListener {
@@ -142,10 +141,10 @@ class HighlightTvActivity : BaseActivity() {
         )
     }
 
+    // TODO: Rename method
     private fun setTopBilledCast(credits: Credits) {
         val castRailFragment = activity_highlight_tv_cast as CastRailFragment
-        val size = if (credits.cast.size > 10) 10 else credits.cast.size
-        castRailFragment.setCast(credits.cast.subList(0, size))
+        castRailFragment.setCredits(credits)
     }
 
 }

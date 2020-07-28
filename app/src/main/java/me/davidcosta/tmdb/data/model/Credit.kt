@@ -7,6 +7,7 @@ data class Credit(
     @SerializedName("id") val id: Long,
     @SerializedName("credit_id") val creditId: String,
     @SerializedName("name") val name: String,
+    @SerializedName("department") val department: String?,
     @SerializedName("profile_path") val profilePath: String,
     @SerializedName("gender") val gender: Int
-) :Serializable
+) : Serializable

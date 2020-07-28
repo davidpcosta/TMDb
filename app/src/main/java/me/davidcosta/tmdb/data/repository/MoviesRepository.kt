@@ -11,6 +11,8 @@ import java.util.*
 
 class MoviesRepository(private val api: Api){
 
+    private val UPCOMING_DAYS_COUNT = 21
+
     suspend fun genres(): List<Genre> {
         val deferred = api.movieGenres()
         return deferred.await().genres
@@ -43,11 +45,9 @@ class MoviesRepository(private val api: Api){
     }
 
     suspend fun upcoming(): List<Media> {
-        val startDate = Calendar.getInstance().apply {
-            add(Calendar.DATE, -21)
-        }
+        val startDate = Calendar.getInstance()
         val endDate = Calendar.getInstance().apply {
-            add(Calendar.DATE, 7)
+            add(Calendar.DATE, UPCOMING_DAYS_COUNT)
         }
 
         val deferred = api.moviesDiscover(
