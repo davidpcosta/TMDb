@@ -14,89 +14,113 @@ import me.davidcosta.tmdb.extensions.show
 class HomeFragment : BaseFragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var viewManagerUpcoming: LinearLayoutManager
-    private lateinit var viewManagerTrending: LinearLayoutManager
-    private lateinit var viewManagerMovies: LinearLayoutManager
-    private lateinit var viewManagerTvs: LinearLayoutManager
-    private lateinit var upcomingAdapter: MediaRecycleViewAdapter
+
+    private lateinit var upcomingMoviesViewManager: LinearLayoutManager
+    private lateinit var upcomingMoviesAdapter: MediaRecycleViewAdapter
+
+    private lateinit var latestMoviesViewManager: LinearLayoutManager
+    private lateinit var latestMoviesAdapter: MediaRecycleViewAdapter
+
+    private lateinit var trendingViewManager: LinearLayoutManager
     private lateinit var trendingAdapter: MediaRecycleViewAdapter
+
+    private lateinit var popularMoviesViewManager: LinearLayoutManager
     private lateinit var popularMoviesAdapter: MediaRecycleViewAdapter
+
+    private lateinit var popularTvsViewManager: LinearLayoutManager
     private lateinit var popularTvsAdapter: MediaRecycleViewAdapter
 
     override fun resourceView() =
         R.layout.fragment_home
 
+    override fun toolbarResourceView() =
+        R.layout.toolbar_home
+
     override fun setupView(view: View) {
 
-        // Upcoming Rail
         homeViewModel = ViewModelProvider(this, HomeViewModelFactory()).get(HomeViewModel::class.java)
-        viewManagerUpcoming = LinearLayoutManager(requireActivity().applicationContext).apply {
+
+        // Upcoming Movies Rail
+        upcomingMoviesViewManager = LinearLayoutManager(requireActivity().applicationContext).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
-        upcomingAdapter = MediaRecycleViewAdapter(requireContext())
+        upcomingMoviesAdapter = MediaRecycleViewAdapter(requireContext())
         view.fragment_home_upcoming.apply {
-            layoutManager = viewManagerUpcoming
-            adapter = upcomingAdapter
+            layoutManager = upcomingMoviesViewManager
+            adapter = upcomingMoviesAdapter
+        }
+
+        // Latest Movies Rail
+        latestMoviesViewManager = LinearLayoutManager(requireActivity().applicationContext).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
+        latestMoviesAdapter = MediaRecycleViewAdapter(requireContext())
+        view.fragment_home_latest.apply {
+            layoutManager = latestMoviesViewManager
+            adapter = latestMoviesAdapter
         }
 
         // Trending Rail
-        homeViewModel = ViewModelProvider(this, HomeViewModelFactory()).get(HomeViewModel::class.java)
-        viewManagerTrending = LinearLayoutManager(requireActivity().applicationContext).apply {
+        trendingViewManager = LinearLayoutManager(requireActivity().applicationContext).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         trendingAdapter = MediaRecycleViewAdapter(requireContext())
         view.fragment_home_trending.apply {
-            layoutManager = viewManagerTrending
+            layoutManager = trendingViewManager
             adapter = trendingAdapter
         }
 
         // Popular Movies Rail
-        homeViewModel = ViewModelProvider(this, HomeViewModelFactory()).get(HomeViewModel::class.java)
-        viewManagerMovies = LinearLayoutManager(requireActivity().applicationContext).apply {
+        popularMoviesViewManager = LinearLayoutManager(requireActivity().applicationContext).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         popularMoviesAdapter = MediaRecycleViewAdapter(requireContext())
         view.fragment_home_popular_movies.apply {
-            layoutManager = viewManagerMovies
+            layoutManager = popularMoviesViewManager
             adapter = popularMoviesAdapter
         }
 
         // Popular TVs Rail
-        viewManagerTvs = LinearLayoutManager(requireActivity().applicationContext).apply {
+        popularTvsViewManager = LinearLayoutManager(requireActivity().applicationContext).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         popularTvsAdapter = MediaRecycleViewAdapter(requireContext())
         view.fragment_home_popular_tvs.apply {
-            layoutManager = viewManagerTvs
+            layoutManager = popularTvsViewManager
             adapter = popularTvsAdapter
         }
 
-        fetchUpcomingAndAddObserver()
+        fetchUpcomingMoviesAndAddObserver()
+        fetchLatestMoviesAndAddObserver()
         fetchTrendingAndAddObserver()
         fetchPopularMoviesAndAddObserver()
         fetchPopularTvsAndAddObserver()
     }
 
-    private fun fetchUpcomingAndAddObserver() {
+    private fun fetchUpcomingMoviesAndAddObserver() {
         homeViewModel.fetchUpcomingMovies()
         homeViewModel.upcomingMovies.observe(viewLifecycleOwner, Observer { medias ->
-            upcomingAdapter.medias = medias
-                .filter { media ->
-                    media.getMediaType != MediaType.PERSON
-                }
-            upcomingAdapter.notifyDataSetChanged()
+            upcomingMoviesAdapter.titles = medias
+            upcomingMoviesAdapter.notifyDataSetChanged()
             view?.fragment_home_upcoming_loading?.hide()
             view?.fragment_home_upcoming?.show()
         })
     }
 
+    private fun fetchLatestMoviesAndAddObserver() {
+        homeViewModel.fetchLatestMovies()
+        homeViewModel.latestMovies.observe(viewLifecycleOwner, Observer { titles ->
+            latestMoviesAdapter.titles = titles
+            latestMoviesAdapter.notifyDataSetChanged()
+            view?.fragment_home_latest_loading?.hide()
+            view?.fragment_home_latest?.show()
+        })
+    }
+
     private fun fetchTrendingAndAddObserver() {
         homeViewModel.fetchTrending()
-        homeViewModel.trending.observe(viewLifecycleOwner, Observer { medias ->
-            trendingAdapter.medias = medias
-                .filter { media ->
-                    media.getMediaType != MediaType.PERSON
-                }
+        homeViewModel.trending.observe(viewLifecycleOwner, Observer { titles ->
+            trendingAdapter.titles = titles
             trendingAdapter.notifyDataSetChanged()
             view?.fragment_home_trending_loading?.hide()
             view?.fragment_home_trending?.show()
@@ -106,7 +130,7 @@ class HomeFragment : BaseFragment() {
     private fun fetchPopularMoviesAndAddObserver() {
         homeViewModel.fetchPopularMovies()
         homeViewModel.popularMovies.observe(viewLifecycleOwner, Observer { movies ->
-            popularMoviesAdapter.medias = movies
+            popularMoviesAdapter.titles = movies
             popularMoviesAdapter.notifyDataSetChanged()
             view?.fragment_home_popular_movies_loading?.hide()
             view?.fragment_home_popular_movies?.show()
@@ -116,7 +140,7 @@ class HomeFragment : BaseFragment() {
     private fun fetchPopularTvsAndAddObserver() {
         homeViewModel.fetchPopularTvs()
         homeViewModel.popularTvs.observe(viewLifecycleOwner, Observer { tvs ->
-            popularTvsAdapter.medias = tvs
+            popularTvsAdapter.titles = tvs
             popularTvsAdapter.notifyDataSetChanged()
             view?.fragment_home_popular_tvs_loading?.hide()
             view?.fragment_home_popular_tvs?.show()

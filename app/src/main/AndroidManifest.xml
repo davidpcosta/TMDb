@@ -15,10 +15,9 @@
             android:name=".ui.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.TMDbTheme.FullScreen">
+            android:theme="@style/Theme.TMDbTheme.Dark.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,16 +26,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.TMDbTheme.Dark" />
         <activity
+            android:name=".ui.highlight.HighlightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TMDbTheme.Dark" />
+        <activity
             android:name=".ui.highlight.movie.HighlightMovieActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.ActionBar.Transparent" />
+            android:theme="@style/Theme.TMDbTheme.Dark" />
         <activity
             android:name=".ui.highlight.tv.HighlightTvActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.ActionBar.Transparent" />
+            android:theme="@style/Theme.TMDbTheme.Dark" />
         <activity
             android:name="me.davidcosta.tmdb.ui.credits.CreditsActivity"
-            android:theme="@style/Theme.TMDbTheme.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TMDbTheme.Dark" />
     </application>
 
 </manifest>

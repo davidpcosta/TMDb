@@ -1,7 +1,7 @@
 package me.davidcosta.tmdb.enums
 
 enum class Keys(val value: String) {
-    ROOM_DATABASE_NAME("database-watchlist"),
+    ROOM_DATABASE_NAME("database"),
     EXTRAS_MEDIA("media"),
     EXTRAS_CREDITS("credits"),
     PREFERENCES_USER_LOGIN("user_login"),

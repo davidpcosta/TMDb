@@ -6,36 +6,38 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.davidcosta.tmdb.data.model.Media
-import me.davidcosta.tmdb.data.repository.MoviesRepository
-import me.davidcosta.tmdb.data.repository.TvsRepository
+import me.davidcosta.tmdb.data.repository.HomeRepository
+import me.davidcosta.tmdb.data.vo.TitleVO
 
 class HomeViewModel(
-    private val moviesRepository: MoviesRepository,
-    private val tvsRepository: TvsRepository
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-    private val mUpcomingMovies: MutableLiveData<List<Media>> = MutableLiveData()
-    private val mTrending: MutableLiveData<List<Media>> = MutableLiveData()
-    private val mPopularMovies: MutableLiveData<List<Media>> = MutableLiveData()
-    private val mPopularTvs: MutableLiveData<List<Media>> = MutableLiveData()
+    private val mUpcomingMovies: MutableLiveData<List<TitleVO>> = MutableLiveData()
+    private val mLatestMovies: MutableLiveData<List<TitleVO>> = MutableLiveData()
+    private val mTrending: MutableLiveData<List<TitleVO>> = MutableLiveData()
+    private val mPopularMovies: MutableLiveData<List<TitleVO>> = MutableLiveData()
+    private val mPopularTvs: MutableLiveData<List<TitleVO>> = MutableLiveData()
 
-    val upcomingMovies: LiveData<List<Media>>
+    val upcomingMovies: LiveData<List<TitleVO>>
         get() = mUpcomingMovies
 
-    val trending: LiveData<List<Media>>
+    val latestMovies: LiveData<List<TitleVO>>
+        get() = mLatestMovies
+
+    val trending: LiveData<List<TitleVO>>
         get() = mTrending
 
-    val popularMovies: LiveData<List<Media>>
+    val popularMovies: LiveData<List<TitleVO>>
         get() = mPopularMovies
 
-    val popularTvs: LiveData<List<Media>>
+    val popularTvs: LiveData<List<TitleVO>>
         get() = mPopularTvs
 
     fun fetchTrending() {
         CoroutineScope(Dispatchers.Main).launch {
             mTrending.apply {
-                value = moviesRepository.trending()
+                value = homeRepository.trending()
             }
         }
     }
@@ -43,7 +45,15 @@ class HomeViewModel(
     fun fetchUpcomingMovies() {
         CoroutineScope(Dispatchers.Main).launch {
             mUpcomingMovies.apply {
-                value = moviesRepository.upcoming()
+                value = homeRepository.upcomingMovies()
+            }
+        }
+    }
+
+    fun fetchLatestMovies() {
+        CoroutineScope(Dispatchers.Main).launch {
+            mLatestMovies.apply {
+                value = homeRepository.latestMovies()
             }
         }
     }
@@ -51,7 +61,7 @@ class HomeViewModel(
     fun fetchPopularMovies() {
         CoroutineScope(Dispatchers.Main).launch {
             mPopularMovies.apply {
-                value = moviesRepository.popularMovies()
+                value = homeRepository.popularMovies()
             }
         }
     }
@@ -59,7 +69,7 @@ class HomeViewModel(
     fun fetchPopularTvs() {
         CoroutineScope(Dispatchers.Main).launch {
             mPopularTvs.apply {
-                value = tvsRepository.popularTvs()
+                value = homeRepository.popularTvs()
             }
         }
     }

@@ -200,12 +200,19 @@
     <string name="tv_status_returning_series">Renovada</string>
     <string name="tv_status_ended">Finalizada</string>
 
+
+    <!-- GENDER -->
+    <string name="gender_undefined">-</string>
+    <string name="gender_female">Feminino</string>
+    <string name="gender_male">Masculino</string>
+
     <!-- TV TYPE -->
     <string name="tv_type_scripted">Roteirizada</string>
 
 
     <!-- MAIN / HOME -->
     <string name="fragment_home_label_upcoming">Próximos Lançamentos</string>
+    <string name="fragment_home_label_latest">Últimos Lançamentos</string>
     <string name="fragment_home_label_trending">Tendências</string>
     <string name="fragment_home_label_popular_movies">Filmes Populares</string>
     <string name="fragment_home_label_popular_tvs">Séries Populares</string>
@@ -220,6 +227,7 @@
     <!-- MAIN / BOTTOM NAV BAR -->
     <string name="activity_main_nav_home">Home</string>
     <string name="activity_main_nav_watchlist">Minha lista</string>
+    <string name="activity_main_nav_search">Busca</string>
     <string name="activity_main_nav_settings">Minha conta</string>
 
     <!-- HIGHLIGHT -->
@@ -230,11 +238,14 @@
     <string name="activity_highlight_value_vote_average">Avaliação %1$d%%</string>
     <string name="activity_highlight_value_money">$ %,.2f</string>
     <string name="activity_highlight_value_runtime">%1$dh %2$dmin</string>
+    <string name="activity_highlight_value_runtime_hours">%1$dh</string>
+    <string name="activity_highlight_value_runtime_minutes">%1$dmin</string>
     <string name="activity_highlight_label_cast">Elenco</string>
     <string name="activity_highlight_button_add_to_watchlist">Minha lista</string>
     <string name="activity_highlight_button_added_to_watchlist">Adicionado</string>
     <string name="activity_highlight_message_added_to_watchlist">"Filme adicionado à sua lista"</string>
     <string name="activity_highlight_message_removed_from_watchlist">Filme removido da sua lista</string>
+    <string name="activity_highlight_message_overview_not_available">Sinopse não disponível para o seu idioma.</string>
     <string name="activity_highlight_tv_value_seasons_count_singular">%1$d temporadas</string>
     <string name="activity_highlight_tv_value_seasons_count_plural">%1$d temporadas</string>
 
@@ -252,8 +263,11 @@
     <string name="fragment_cast_rail_label_top_billed_cast">Elenco principal</string>
 
     <!-- CREDITS ACTIVITY -->
-    <string name="tab_cast">Elenco</string>
-    <string name="tab_crew">Equipe Técnica</string>
+    <string name="tab_cast">Elenco (%1$d)</string>
+    <string name="tab_crew">Equipe Técnica  (%1$d)</string>
+
+    <!-- MOVIE ITEM HOME -->
+    <string name="movie_item_home_label_vote_average">%1$d%%</string>
 
 
     <string name="title_activity_scrolling">ScrollingActivity</string>

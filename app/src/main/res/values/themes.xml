@@ -2,42 +2,31 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light" />
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light" />-->
+<!--    <style name="AppTheme.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
+<!--    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+<!--    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
     <!-- MyApp Theme -->
-    <style name="Theme.MyApp" parent="Base.Theme.MyApp"/>
-    <style name="Theme.MyApp.FullScreen" parent="Base.Theme.MyApp.FullScreen" />
-    <style name="Theme.MyApp.NoActionBar" parent="Base.Theme.MyApp.NoActionBar" />
-    <style name="Theme.MyApp.ActionBar.Transparent" parent="Base.Theme.MyApp.ActionBar.Transparent" />
+<!--    <style name="Theme.MyApp" parent="Base.Theme"/>-->
+<!--    <style name="Theme.MyApp.FullScreen" parent="Base.Theme.FullScreen" />-->
+<!--    <style name="Theme.MyApp.NoActionBar" parent="Base.Theme.NoActionBar" />-->
+<!--    <style name="Theme.MyApp.TrasparentActionBar"/>-->
 
     <!-- TMDb Theme -->
-    <style name="Theme.TMDbTheme" parent="Base.Theme.MyApp">
+    <style name="Theme.TMDbTheme.Light" parent="Base.Theme">
         <item name="colorPrimary">@color/tmdb_dark_blue</item>
         <item name="colorPrimaryVariant">@color/tmdb_dark_blue</item>
-
         <item name="colorSecondary">@color/tmdb_light_green</item>
         <item name="colorSecondaryVariant">@color/tmdb_light_green</item>
-
         <item name="colorAccent">@color/tmdb_light_green</item>
         <item name="android:colorBackground">@color/tmdb_dark_blue</item>
     </style>
 
-    <!-- TMDb Dark Theme -->
-    <style name="Theme.TMDbTheme.Dark" parent="Theme.TMDbTheme">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorSecondary">@color/black</item>
-        <item name="colorSecondaryVariant">@color/black</item>
-        <item name="android:colorBackground">@color/black</item>
-    </style>
-
-    <style name="Theme.TMDbTheme.FullScreen">
+    <style name="Theme.TMDbTheme.Light.FullScreen">
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -45,21 +34,43 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="colorPrimary">@color/transparent</item>
     </style>
-
-    <style name="Theme.TMDbTheme.NoActionBar" parent="Base.Theme.MyApp.ActionBar"/>
-    <style name="Theme.TMDbTheme.ActionBar" />
-
-    <style name="Theme.TMDbTheme.ActionBar.Transparent">
+    <style name="Theme.TMDbTheme.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.TMDbTheme.Light.TransparentActionBar">
         <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="colorPrimary">@color/transparent</item>
     </style>
 
+    <!-- TMDb Dark Theme -->
+    <style name="Theme.TMDbTheme.Dark" parent="Base.Theme">
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+
+    <style name="Theme.TMDbTheme.Dark.FullScreen">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@color/transparent</item>
+    </style>
+    <style name="Theme.TMDbTheme.Dark.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.TMDbTheme.Dark.TransparentActionBar">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimary">@color/transparent</item>
+    </style>
 
 
     <!-- Base Theme -->
 
-    <style name="Base.Theme.MyApp.FullScreen">
+    <style name="Base.Theme.FullScreen">
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -68,19 +79,18 @@
         <item name="colorPrimary">@color/transparent</item>
     </style>
 
-    <style name="Base.Theme.MyApp.NoActionBar">
+    <style name="Base.Theme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Base.Theme.MyApp.ActionBar" />
-    <style name="Base.Theme.MyApp.ActionBar.Transparent">
+    <style name="Base.Theme.TransparentActionBar">
         <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="colorPrimary">@color/transparent</item>
     </style>
 
-    <style name="Base.Theme.MyApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Base.Theme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
         <item name="colorPrimary">@color/black</item>
@@ -90,7 +100,7 @@
         <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/white</item>
 
-        <item name="colorAccent">@color/tmdb_light_blue</item>
+        <item name="colorAccent">@color/white</item>
 
         <!--colorBackground appears behind scrollable content and is used for the default window background. -->
         <item name="android:colorBackground">@color/black</item>
@@ -131,6 +141,7 @@
         <!--Component styles-->
         <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
         <item name="tabStyle">@style/Widget.MaterialComponents.TabLayout.Colored</item>
+<!--        <item name="editTextStyle">@style/Widget.MyTheme.Search.SearchInput</item>-->
 <!--        <item name="buttonStyle">@style/Widget.MaterialComponents.Button.TextButton.Icon</item>-->
     </style>
 </resources>

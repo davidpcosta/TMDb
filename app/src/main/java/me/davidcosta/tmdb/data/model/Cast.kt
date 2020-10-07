@@ -12,5 +12,6 @@ data class Cast (
     @SerializedName("character") val character: String,
     @SerializedName("profile_path") val profilePath: String?,
     @SerializedName("name") val name: String,
-    @SerializedName("order") val order: Int
+    @SerializedName("order") val order: Int,
+    @SerializedName("gender") val gender: Int
 ): Serializable

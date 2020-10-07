@@ -8,7 +8,7 @@ data class Movie (
     @SerializedName("id") var id: Long,
     @SerializedName("title") var title: String,
     @SerializedName("original_title") var originalTitle: String,
-    @SerializedName("release_date") var releaseDate: Date,
+    @SerializedName("release_date") var releaseDate: Date?,
     @SerializedName("original_language") var originalLanguage: String,
     @SerializedName("vote_average") var voteAverage: Double,
     @SerializedName("genres") var genres: List<Genre>,

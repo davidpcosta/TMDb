@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import me.davidcosta.tmdb.data.api.ApiService
 import me.davidcosta.tmdb.data.dao.AppDatabase
+import me.davidcosta.tmdb.data.dao.RoomDatabaseFactory
 import me.davidcosta.tmdb.data.repository.WatchlistRepository
 
 @Suppress("UNCHECKED_CAST")
@@ -16,10 +17,7 @@ class WatchlistViewModelFactory(private val context: Context) : ViewModelProvide
             return WatchlistViewModel(
                     watchlistRepository = WatchlistRepository(
                         api = ApiService.instance,
-                        watchlistDao= Room.databaseBuilder(
-                            context,
-                            AppDatabase::class.java, "database-watchlist"
-                        ).allowMainThreadQueries().build().watchlistDat()
+                        watchlistDao= RoomDatabaseFactory.getInstance(context).watchlistDat()
                     )
             ) as T
         }

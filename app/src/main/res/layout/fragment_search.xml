@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.search.SearchFragment">
+
+    <TextView
+        style="@style/Widget.MyTheme.Search.EmptyTitle"
+        android:id="@+id/fragment_search_empty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descubra"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/Widget.MyTheme.Search.EmptySubTitle"
+        android:id="@+id/fragment_search_empty_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesquise por um filme ou série..."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_search_empty_title" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/fragment_search_group_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="fragment_search_empty_title, fragment_search_empty_subtitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_search_reciclerview_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

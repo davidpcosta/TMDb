@@ -1,13 +1,13 @@
 package me.davidcosta.tmdb.base
 
-import android.content.res.Resources
 import android.os.Bundle
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import me.davidcosta.tmdb.R
+import androidx.navigation.ui.AppBarConfiguration
 
 
 abstract class BaseFragment : Fragment() {
@@ -15,19 +15,44 @@ abstract class BaseFragment : Fragment() {
     abstract fun resourceView(): Int
     abstract fun setupView(view: View)
 
+    open fun toolbarResourceView(): Int? =
+        null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-//        val context = ContextThemeWrapper(requireContext(), R.style.Theme_TMDbTheme)
-//        val localInflater = inflater.cloneInContext(context)
-//        val view = localInflater.inflate(resourceView(), null, false)
-
         val view = inflater.inflate(resourceView(), container, false)
-        this.setupView(view)
+
+        // Setup custom toolbar if defined
+        if (toolbarResourceView() != null) {
+            setupCustomToolbar()
+        } else {
+            setupDefaultToolbar()
+        }
+
+        setupView(view)
+
         return view
+    }
+
+    private fun setupDefaultToolbar() {
+        with(requireActivity() as AppCompatActivity) {
+            this.supportActionBar?.apply {
+                displayOptions  = ActionBar.DISPLAY_SHOW_TITLE
+            }
+        }
+    }
+
+    private fun setupCustomToolbar() {
+        with(requireActivity() as AppCompatActivity) {
+            this.supportActionBar?.apply {
+                displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+                toolbarResourceView()?.let { setCustomView(it) }
+            }
+        }
     }
 
 }

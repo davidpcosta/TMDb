@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.cast_rail_item.view.*
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Cast
+import me.davidcosta.tmdb.data.vo.PersonVO
 import me.davidcosta.tmdb.extensions.loadProfilePicture
 
 class CastRailAdapter(
@@ -18,13 +18,13 @@ class CastRailAdapter(
 ): RecyclerView.Adapter<CastRailAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var cast: List<Cast> = ArrayList()
+    var cast: List<PersonVO> = ArrayList()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val profilePicture = view.cast_rail_profile_picture as ImageView
         val personName = view.cast_rail_person_name as TextView
-        val charactetName = view.cast_rail_character_name as TextView
+        val characterName = view.cast_rail_character_name as TextView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,7 +42,7 @@ class CastRailAdapter(
         val person = cast[position]
 
         holder.personName.text = person.name
-        holder.charactetName.text = person.character
+        holder.characterName.text = person.role
         person.profilePath?.let {
             holder.profilePicture.loadProfilePicture(applicationContext, it)
             return

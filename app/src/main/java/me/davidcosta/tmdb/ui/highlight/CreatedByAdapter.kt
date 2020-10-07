@@ -1,25 +1,24 @@
-package me.davidcosta.tmdb.ui.highlight.tv
+package me.davidcosta.tmdb.ui.highlight
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import android.widget.TextView
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.model.Credit
+import me.davidcosta.tmdb.data.vo.PersonVO
 
 class CreatedByAdapter(applicationContext: Context): BaseAdapter() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var credits: List<Credit> = ArrayList()
+    var credits: List<PersonVO> = ArrayList()
 
     override fun getCount(): Int {
         return credits.size
     }
 
-    override fun getItem(i: Int): Credit {
+    override fun getItem(i: Int): PersonVO {
         return credits[i]
     }
 
@@ -30,19 +29,20 @@ class CreatedByAdapter(applicationContext: Context): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         val view: View?
         val viewHolder: ViewHolder
-        val credit = getItem(position)
+        val personVO = getItem(position)
 
         if (convertView == null) {
             view = inflater.inflate(R.layout.created_by_item, parent, false)
-            viewHolder = ViewHolder(view)
+            viewHolder =
+                ViewHolder(view)
             view.tag = viewHolder
         } else {
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
 
-        viewHolder.name.text = credit.name
-        viewHolder.jobRole.text = "Criação"
+        viewHolder.name.text = personVO.name
+        viewHolder.jobRole.text = personVO.job
 
         return view
     }

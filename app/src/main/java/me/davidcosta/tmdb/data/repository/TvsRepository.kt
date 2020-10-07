@@ -20,10 +20,4 @@ class TvsRepository(private val api: Api) {
         val deferred = api.tvsCredits(tvId)
         return deferred.await()
     }
-
-    suspend fun popularTvs(): List<Media> {
-        val deferred = api.tvsPopular()
-        return deferred.await().results.map { it.lazyInit() }
-    }
-
 }

@@ -6,6 +6,8 @@ import me.davidcosta.tmdb.data.model.Credits
 import me.davidcosta.tmdb.data.model.Genre
 import me.davidcosta.tmdb.data.model.Media
 import me.davidcosta.tmdb.data.model.Movie
+import me.davidcosta.tmdb.data.vo.TitleDetailsVO
+import me.davidcosta.tmdb.enums.MediaType
 import me.davidcosta.tmdb.extensions.toJsonFormat
 import java.util.*
 
@@ -37,6 +39,16 @@ class MoviesRepository(private val api: Api){
         val deferred = api.movieDetails(movieId)
         return deferred.await()
     }
+
+    suspend fun titleDetails(titleId: Long, mediaType: MediaType): TitleDetailsVO =
+        when (mediaType) {
+            MediaType.MOVIE -> movieDetails(titleId).run {
+                TitleDetailsVO.fromMovie( this )
+            }
+            else -> movieDetails(titleId).run {
+                TitleDetailsVO.fromMovie( this )
+            }
+        }
 
     // TODO: Move to home repository
     suspend fun trending(): List<Media> {

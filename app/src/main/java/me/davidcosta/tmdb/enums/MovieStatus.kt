@@ -1,6 +1,8 @@
 package me.davidcosta.tmdb.enums
 
 import me.davidcosta.tmdb.R
+import me.davidcosta.tmdb.extensions.normalizeToEnumName
+import me.davidcosta.tmdb.extensions.toEnum
 
 enum class MovieStatus(val label: Int) {
     RUMORED(R.string.movie_status_rumored),

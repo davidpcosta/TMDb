@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:background="@color/black"
-    android:theme="@style/Theme.MyApp">
+    android:theme="@style/Theme.TMDbTheme.Light">
 
     <TextView
         android:id="@+id/more_details_item_label"

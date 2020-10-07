@@ -23,7 +23,7 @@
             android:layout_marginTop="96dp"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:background="@drawable/ic_local_movies_white_48dp"
+            android:background="@drawable/ic_local_movies_48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

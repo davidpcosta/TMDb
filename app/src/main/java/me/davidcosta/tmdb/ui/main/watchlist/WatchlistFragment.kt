@@ -1,24 +1,18 @@
 package me.davidcosta.tmdb.ui.main.watchlist
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.GridView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.base.BaseFragment
 import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.data.vo.TitleVO
 import me.davidcosta.tmdb.enums.Keys
-import me.davidcosta.tmdb.enums.MediaType
 import me.davidcosta.tmdb.extensions.toast
-import me.davidcosta.tmdb.ui.highlight.movie.HighlightMovieActivity
-import me.davidcosta.tmdb.ui.highlight.tv.HighlightTvActivity
-
+import me.davidcosta.tmdb.ui.highlight.HighlightActivity
 
 class WatchlistFragment : BaseFragment() {
 
@@ -40,7 +34,7 @@ class WatchlistFragment : BaseFragment() {
         watchlistGrid = view.findViewById<GridView>(R.id.watchlist).apply {
             adapter = movieAdapter
             onItemClickListener =  AdapterView.OnItemClickListener { _, _, position, _ ->
-                goToMedia(adapter.getItem(position) as Media)
+                goToHighlight(adapter.getItem(position) as TitleVO)
             }
             onItemLongClickListener = AdapterView.OnItemLongClickListener { _, _, position, _ ->
                 val media = adapter.getItem(position) as Media
@@ -54,20 +48,14 @@ class WatchlistFragment : BaseFragment() {
 
     private fun observeWatchlist() {
         watchlistViewModel.medias.observe(viewLifecycleOwner, Observer {
-            movieAdapter.medias = it.sortedBy { media -> media.name }
+            movieAdapter.titles = it.sortedBy { title -> title.title }
             movieAdapter.notifyDataSetChanged()
         })
     }
 
-    private fun goToMedia(media: Media) {
-        if (media.getMediaType == MediaType.MOVIE) {
-            val intent = Intent(requireContext(), HighlightMovieActivity::class.java)
-            intent.putExtra(Keys.EXTRAS_MEDIA.value, media)
-            requireActivity().startActivity(intent)
-        } else {
-            val intent = Intent(requireContext(), HighlightTvActivity::class.java)
-            intent.putExtra(Keys.EXTRAS_MEDIA.value, media)
-            requireActivity().startActivity(intent)
-        }
+    private fun goToHighlight(titleVO: TitleVO) {
+        val intent = Intent(requireContext(), HighlightActivity::class.java)
+        intent.putExtra(Keys.EXTRAS_MEDIA.value, titleVO)
+        requireActivity().startActivity(intent)
     }
 }

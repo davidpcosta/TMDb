@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.credit_list_item.view.*
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.entity.Person
+import me.davidcosta.tmdb.data.vo.PersonVO
 import me.davidcosta.tmdb.extensions.loadProfilePicture
 
 class CreditListAdapter(
@@ -17,7 +17,7 @@ class CreditListAdapter(
 ): RecyclerView.Adapter<CreditListAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(applicationContext)
-    var persons: List<Person> = ArrayList()
+    var persons: List<PersonVO> = ArrayList()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {

@@ -154,4 +154,14 @@ interface Api {
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
     ): Deferred<PagedResult<Media>>
+
+    /******************************************
+     * SEARCH
+     ******************************************/
+    @GET("search/multi")
+    fun searchMulti(
+        @Query("query") query: String = "",
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = BuildConfig.TMDB_LANGUAGE
+    ): Deferred<PagedResult<Media>>
 }

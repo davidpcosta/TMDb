@@ -2,24 +2,28 @@ package me.davidcosta.tmdb.data.repository
 
 import me.davidcosta.tmdb.data.api.Api
 import me.davidcosta.tmdb.data.dao.WatchlistDao
-import me.davidcosta.tmdb.data.model.*
+import me.davidcosta.tmdb.data.entity.TitleEntity
+import me.davidcosta.tmdb.data.vo.TitleVO
 
 class WatchlistRepository(private val api: Api, private val watchlistDao: WatchlistDao) {
 
-    fun watchlist(): List<Media> {
+    fun watchlist(): List<TitleVO> {
         return watchlistDao.getAll()
+            .map {
+                TitleVO.fromEntity(it)
+            }
     }
 
-    fun addToWatchlist(media: Media) {
-        watchlistDao.insert(media)
+    fun addToWatchlist(titleEntity: TitleEntity) {
+        watchlistDao.insert(titleEntity)
     }
 
-    fun removeFromWatchlist(media: Media) {
-        watchlistDao.delete(media)
+    fun removeFromWatchlist(titleEntity: TitleEntity) {
+        watchlistDao.delete(titleEntity)
     }
 
-    fun isOnWatchlist(media: Media): Boolean {
-        return watchlistDao.findById(media.pk) != null
+    fun isOnWatchlist(titleEntity: TitleEntity): Boolean {
+        return  watchlistDao.findById(titleEntity.pk) != null
     }
 
 }

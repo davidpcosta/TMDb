@@ -12,4 +12,8 @@
     <color name="tmdb_dark_blue">#ff0d253f</color>
     <color name="tmdb_light_blue">#ff01b4e4</color>
     <color name="tmdb_light_green">#ff90cea1</color>
+
+    <color name="tmdb_vote_average_high">#ff90cea1</color>
+    <color name="tmdb_vote_average_medium">#FBED6B</color>
+    <color name="tmdb_vote_average_low">#FF6464</color>
 </resources>

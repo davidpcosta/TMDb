@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import kotlinx.android.synthetic.main.credits_page.view.*
 import me.davidcosta.tmdb.R
-import me.davidcosta.tmdb.data.entity.Person
-import me.davidcosta.tmdb.data.model.Credits
+import me.davidcosta.tmdb.data.vo.CreditsVO
+import me.davidcosta.tmdb.data.vo.PersonVO
 import me.davidcosta.tmdb.ui.highlight.CreditListAdapter
 
 
@@ -18,7 +18,7 @@ private val TAB_TITLES = arrayOf(
     R.string.tab_crew
 )
 
-class SectionsPagerAdapter(val context: Context, val credits: Credits) : PagerAdapter() {
+class SectionsPagerAdapter(val context: Context, val credits: CreditsVO) : PagerAdapter() {
 
     private lateinit var castViewManager: LinearLayoutManager
     private lateinit var castAdapter: CreditListAdapter
@@ -31,7 +31,14 @@ class SectionsPagerAdapter(val context: Context, val credits: Credits) : PagerAd
         TAB_TITLES.size
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.getString(TAB_TITLES[position])
+
+        val count = if (position == 0) {
+            credits.cast.size
+        } else {
+            credits.crew.size
+        }
+
+        return context.getString(TAB_TITLES[position], count)
     }
 
     override fun instantiateItem(collection: ViewGroup, position: Int): Any {
@@ -47,29 +54,14 @@ class SectionsPagerAdapter(val context: Context, val credits: Credits) : PagerAd
         }
 
         if (position == 0) {
-            castAdapter.persons = credits.cast.map { return@map Person(it.castId, it.name, it.character, it.profilePath) }
+            castAdapter.persons = credits.cast
             castAdapter.notifyDataSetChanged()
         } else {
-            castAdapter.persons = credits.crew.map { return@map Person(it.id, it.name, it.department, it.profilePath) }
+            castAdapter.persons = credits.crew.sortedBy { it.role }
             castAdapter.notifyDataSetChanged()
         }
 
         collection.addView(view)
         return view
     }
-
-//    override fun getItem(position: Int): Fragment {
-//        // getItem is called to instantiate the fragment for the given page.
-//        // Return a PlaceholderFragment (defined as a static inner class below).
-//        return PlaceholderFragment.newInstance(position + 1)
-//    }
-//
-//    override fun getPageTitle(position: Int): CharSequence? {
-//        return context.resources.getString(TAB_TITLES[position])
-//    }
-//
-//    override fun getCount(): Int {
-//        // Show 2 total pages.
-//        return 2
-//    }
 }

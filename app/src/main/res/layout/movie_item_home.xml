@@ -10,7 +10,7 @@
     tools:layout_height="150dp">
 
     <ImageView
-        android:id="@+id/poster"
+        android:id="@+id/movie_item_home_poster"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         tools:layout_width="100dp"
@@ -21,5 +21,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
+
+    <!-- TODO: Move styles to file -->
+    <TextView
+        android:id="@+id/movie_item_home_vote_average"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        tools:text="75%"
+        android:textColor="?attr/colorAccent"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

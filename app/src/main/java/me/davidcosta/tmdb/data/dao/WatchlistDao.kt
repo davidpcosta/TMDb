@@ -5,24 +5,24 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.data.entity.TitleEntity
 
 @Dao
 interface WatchlistDao {
     @Query("SELECT * FROM watchlist")
-    fun getAll(): List<Media>
+    fun getAll(): List<TitleEntity>
 
     @Query("SELECT * FROM watchlist WHERE pk = :pk ")
-    fun findById(pk: String): Media?
+    fun findById(pk: String): TitleEntity?
 
     @Insert(onConflict = REPLACE)
-    fun insertAll(medias: List<Media>)
+    fun insertAll(entities: List<TitleEntity>)
 
     @Insert(onConflict = REPLACE)
-    fun insert(media: Media)
+    fun insert(entity: TitleEntity)
 
     @Delete
-    fun delete(media: Media)
+    fun delete(entity: TitleEntity)
 
     @Query("DELETE FROM watchlist")
     fun deleteAll()

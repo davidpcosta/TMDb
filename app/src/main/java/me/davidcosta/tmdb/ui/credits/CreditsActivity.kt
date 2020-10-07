@@ -3,8 +3,8 @@ package me.davidcosta.tmdb.ui.credits
 import kotlinx.android.synthetic.main.activity_credits.*
 import me.davidcosta.tmdb.R
 import me.davidcosta.tmdb.base.BaseActivity
-import me.davidcosta.tmdb.data.model.Credits
-import me.davidcosta.tmdb.data.model.Media
+import me.davidcosta.tmdb.data.vo.CreditsVO
+import me.davidcosta.tmdb.data.vo.TitleVO
 import me.davidcosta.tmdb.enums.Keys
 
 class CreditsActivity : BaseActivity() {
@@ -13,8 +13,8 @@ class CreditsActivity : BaseActivity() {
 
     override fun setupView() {
 
-        val media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as Media
-        val credits = intent.getSerializableExtra(Keys.EXTRAS_CREDITS.value) as Credits
+        val media = intent.getSerializableExtra(Keys.EXTRAS_MEDIA.value) as TitleVO
+        val credits = intent.getSerializableExtra(Keys.EXTRAS_CREDITS.value) as CreditsVO
 
         val sectionsPagerAdapter =
             SectionsPagerAdapter(
@@ -22,13 +22,9 @@ class CreditsActivity : BaseActivity() {
                 credits
             )
 
-//        val viewPager: ViewPager = findViewById(R.id.view_pager)
         view_pager.adapter = sectionsPagerAdapter
-
-//        val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(view_pager)
 
-
-        supportActionBar?.title = media.nameOrTile
+        supportActionBar?.title = media.title
     }
 }
